@@ -60,8 +60,9 @@ namespace BasicFacebookFeatures
         ///</remarks>
         private void loginAndInit()
         {
-			m_LoginResult = FacebookService.Login("1450160541956417", /// (desig patter's "Design Patterns Course App 2.4" app)
-					"email",
+			m_LoginResult = FacebookService.Login("973153713605868", /// (desig patter's "Design Patterns Course App 2.4" app)
+                /// 1450160541956417
+                  "email",
                     "public_profile",
                     "user_age_range",
                     "user_birthday",
