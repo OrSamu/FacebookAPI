@@ -44,5 +44,11 @@ namespace BasicFacebookFeatures
             FriendsQuizForm friendQuizForm = new FriendsQuizForm(r_FacebookLogicController);
             friendQuizForm.ShowDialog();
         }
+
+        private void AdvancedImageSearch_Click(object sender, EventArgs e)
+        {
+            AdvancedImageForm form = new AdvancedImageForm(r_FacebookLogicController.LoggedInUser);
+            form.ShowDialog();
+        }
     }
 }

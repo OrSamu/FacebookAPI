@@ -33,6 +33,7 @@ namespace BasicFacebookFeatures
             this.friendsGameButton = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.usernameLabel = new System.Windows.Forms.Label();
+            this.AdvancedImageSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,11 +79,22 @@ namespace BasicFacebookFeatures
             this.usernameLabel.Text = "Username";
             this.usernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // AdvancedImageSearch
+            // 
+            this.AdvancedImageSearch.Location = new System.Drawing.Point(208, 21);
+            this.AdvancedImageSearch.Name = "AdvancedImageSearch";
+            this.AdvancedImageSearch.Size = new System.Drawing.Size(88, 23);
+            this.AdvancedImageSearch.TabIndex = 4;
+            this.AdvancedImageSearch.Text = "Advanced image search";
+            this.AdvancedImageSearch.UseVisualStyleBackColor = true;
+            this.AdvancedImageSearch.Click += new System.EventHandler(this.AdvancedImageSearch_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.AdvancedImageSearch);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.friendsGameButton);
@@ -101,5 +113,6 @@ namespace BasicFacebookFeatures
         private System.Windows.Forms.Button friendsGameButton;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Label usernameLabel;
+        private System.Windows.Forms.Button AdvancedImageSearch;
     }
 }

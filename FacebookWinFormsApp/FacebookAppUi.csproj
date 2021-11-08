@@ -89,11 +89,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvancedImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedImageForm.Designer.cs">
+      <DependentUpon>AdvancedImageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FriendsQuizForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FriendsQuizForm.Designer.cs">
       <DependentUpon>FriendsQuizForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridPhoto.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -109,6 +118,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AdvancedImageForm.resx">
+      <DependentUpon>AdvancedImageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FriendsQuizForm.resx">
       <DependentUpon>FriendsQuizForm.cs</DependentUpon>
     </EmbeddedResource>
