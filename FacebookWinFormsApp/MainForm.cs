@@ -33,7 +33,9 @@ namespace BasicFacebookFeatures
         {
             profilePictureBox.ImageLocation = r_FacebookLogicController.RetrieveProfilePicture();
             usernameLabel.Text = r_FacebookLogicController.RetrieveUsername();
-            
+            showUserStatuses();
+
+
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -90,8 +92,6 @@ namespace BasicFacebookFeatures
                 postButton.Enabled = false;
                 statusTextBox.Text = "What's on your mind?";
             }
-
-            
         }
 
         private void showUserStatuses()
@@ -102,7 +102,7 @@ namespace BasicFacebookFeatures
 
                 foreach(string status in userPostedStatuses)
                 {
-                    listBoxPosts.Items.Add("status");
+                    listBoxPosts.Items.Add(status);
                 }
             }
             catch (Exception exception)
@@ -115,7 +115,12 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                //List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus();
+                List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
+
+                foreach(string comment in commentsForStatus)
+                {
+                    listBoxComments.Items.Add(comment);
+                }
             }
             catch(Exception exception)
             {

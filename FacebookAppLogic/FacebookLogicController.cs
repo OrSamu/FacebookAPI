@@ -110,7 +110,7 @@ namespace FacebookAppLogic
             }
             catch(Exception exception)
             {
-                throw new Exception("Error - failed to retrieve friends");
+                throw new Exception("Error - failed to retrieve posted statuses");
             }
 
             return postsList;
@@ -128,14 +128,24 @@ namespace FacebookAppLogic
             }
         }
 
-        /*public List<string> RetrieveCommentsForStatus(int i_IndexForRelatedStatus)
+        public List<string> RetrieveCommentsForStatus(int i_IndexForRelatedStatus)
         {
             List<string> commentsRelated = new List<string>();
 
-            FacebookObjectCollection<Comment> newComment = LoggedInUser.Posts[i_IndexForRelatedStatus].Comments;
+            try
+            {
+                foreach (Comment commentOnStatus in LoggedInUser.Posts[i_IndexForRelatedStatus].Comments)
+                {
+                    commentsRelated.Add(commentOnStatus.Message);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Error - Failed to retrieve comments");
+            }
 
             return commentsRelated;
-        }*/
+        }
 
         public List<String> RetrieveEvents()
         {
