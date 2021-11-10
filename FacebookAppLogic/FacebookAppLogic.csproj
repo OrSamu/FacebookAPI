@@ -39,16 +39,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Facebook">
-      <HintPath>..\FBApi\Facebook.dll</HintPath>
+      <HintPath>..\..\..\design patterns\test\FacebookAPI\FBApi\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="FbGraphApiWrapper">
-      <HintPath>..\FBApi\FbGraphApiWrapper.dll</HintPath>
+      <HintPath>..\..\..\design patterns\test\FacebookAPI\FBApi\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacebookImages.cs" />
     <Compile Include="FacebookLogicController.cs" />
     <Compile Include="FacebooksFriends.cs" />
+    <Compile Include="Filters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
