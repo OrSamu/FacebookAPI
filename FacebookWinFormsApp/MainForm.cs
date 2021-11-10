@@ -34,8 +34,9 @@ namespace BasicFacebookFeatures
             profilePictureBox.ImageLocation = r_FacebookLogicController.RetrieveProfilePicture();
             usernameLabel.Text = r_FacebookLogicController.RetrieveUsername();
             showUserStatuses();
-
-
+            showUserEvents();
+            showUserGroups();
+            showUserPages();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -127,5 +128,58 @@ namespace BasicFacebookFeatures
                 MessageBox.Show(exception.Message);
             }
         }
+
+        private void showUserEvents()
+        {
+            try
+            {
+                List<string> userEvents = r_FacebookLogicController.RetrieveEvents();
+
+                foreach (string facebookEventName in userEvents)
+                {
+                    listBoxEvents.Items.Add(facebookEventName);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void showUserPages()
+        {
+            try
+            {
+                List<string> userLikedPages = r_FacebookLogicController.RetrievePages();
+
+                foreach (string likedPageName in userLikedPages)
+                {
+                    listBoxPages.Items.Add(likedPageName);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void showUserGroups()
+        {
+            try
+            {
+                List<string> userLikedGroups = r_FacebookLogicController.RetrieveGroups();
+
+                foreach (string likedGroupName in userLikedGroups)
+                {
+                    listBoxGroups.Items.Add(likedGroupName);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+
     }
 }
