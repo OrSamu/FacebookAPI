@@ -13,7 +13,10 @@ namespace BasicFacebookFeatures
 {
     public partial class MainForm : Form
     {
-        
+        //private const string k_SuccessfulPostPublish = "Post published successfully";
+        //private const string k_EmptyPostPublishAttempt = "You cannot publish an empty post";
+        private const string k_DefaultStatusText = "What's on your mind?";
+
         private readonly LoginForm r_LoginForm;
         private readonly FacebookLogicController r_FacebookLogicController;
         
@@ -30,6 +33,7 @@ namespace BasicFacebookFeatures
         {
             profilePictureBox.ImageLocation = r_FacebookLogicController.RetrieveProfilePicture();
             usernameLabel.Text = r_FacebookLogicController.RetrieveUsername();
+            
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -49,6 +53,74 @@ namespace BasicFacebookFeatures
         {
             AdvancedImageForm form = new AdvancedImageForm(r_FacebookLogicController.LoggedInUser);
             form.ShowDialog();
+        }
+
+        private void statusTextBox_Click(object sender, EventArgs e)
+        {
+            bool isDefaultStatus = string.Equals(statusTextBox.Text, k_DefaultStatusText);
+            if (isDefaultStatus)
+            {
+                statusTextBox.Clear();
+            }
+
+            postButton.Enabled = true;
+        }
+
+        private void postButton_Click(object sender, EventArgs e)
+        {
+            bool isStatusEmpty = string.IsNullOrEmpty(statusTextBox.Text);
+
+            try
+            {
+                if(isStatusEmpty)
+                {
+                    MessageBox.Show("Error - can't post empty status");
+                }
+
+                r_FacebookLogicController.PostStatus(statusTextBox.Text);
+                //refresh posts
+
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            finally
+            {
+                postButton.Enabled = false;
+                statusTextBox.Text = "What's on your mind?";
+            }
+
+            
+        }
+
+        private void showUserStatuses()
+        {
+            try
+            {
+                List<string> userPostedStatuses = r_FacebookLogicController.RetrievePostedStatuses();
+
+                foreach(string status in userPostedStatuses)
+                {
+                    listBoxPosts.Items.Add("status");
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus();
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }
