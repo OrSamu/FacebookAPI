@@ -14,7 +14,7 @@ namespace BasicFacebookFeatures
     public partial class MainForm : Form
     {
         //private const string k_SuccessfulPostPublish = "Post published successfully";
-        //private const string k_EmptyPostPublishAttempt = "You cannot publish an empty post";
+        private const string k_EmptyDataRetrieved = "No data to show";
         private const string k_DefaultStatusText = "What's on your mind?";
 
         private readonly LoginForm r_LoginForm;
@@ -81,8 +81,7 @@ namespace BasicFacebookFeatures
                 }
 
                 r_FacebookLogicController.PostStatus(statusTextBox.Text);
-                //refresh posts
-
+                listBoxPosts.Items.Add(statusTextBox.Text);
             }
             catch(Exception exception)
             {
@@ -100,10 +99,17 @@ namespace BasicFacebookFeatures
             try
             {
                 List<string> userPostedStatuses = r_FacebookLogicController.RetrievePostedStatuses();
-
-                foreach(string status in userPostedStatuses)
+                
+                if (userPostedStatuses.Count > 0)
                 {
-                    listBoxPosts.Items.Add(status);
+                    foreach (string status in userPostedStatuses)
+                    {
+                        listBoxPosts.Items.Add(status);
+                    }
+                }
+                else
+                {
+                    listBoxPosts.Items.Add(k_EmptyDataRetrieved);
                 }
             }
             catch (Exception exception)
@@ -118,9 +124,16 @@ namespace BasicFacebookFeatures
             {
                 List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
 
-                foreach(string comment in commentsForStatus)
+                if (commentsForStatus.Count > 0)
                 {
-                    listBoxComments.Items.Add(comment);
+                    foreach (string comment in commentsForStatus)
+                    {
+                        listBoxComments.Items.Add(comment);
+                    }
+                }
+                else
+                {
+                    listBoxComments.Items.Add(k_EmptyDataRetrieved);
                 }
             }
             catch(Exception exception)
@@ -135,9 +148,16 @@ namespace BasicFacebookFeatures
             {
                 List<string> userEvents = r_FacebookLogicController.RetrieveEvents();
 
-                foreach (string facebookEventName in userEvents)
+                if (userEvents.Count > 0)
                 {
-                    listBoxEvents.Items.Add(facebookEventName);
+                    foreach (string facebookEventName in userEvents)
+                    {
+                        listBoxEvents.Items.Add(facebookEventName);
+                    }
+                }
+                else
+                {
+                    listBoxEvents.Items.Add(k_EmptyDataRetrieved);
                 }
             }
             catch (Exception exception)
@@ -152,9 +172,16 @@ namespace BasicFacebookFeatures
             {
                 List<string> userLikedPages = r_FacebookLogicController.RetrievePages();
 
-                foreach (string likedPageName in userLikedPages)
+                if (userLikedPages.Count > 0)
                 {
-                    listBoxPages.Items.Add(likedPageName);
+                    foreach (string likedPageName in userLikedPages)
+                    {
+                        listBoxPages.Items.Add(likedPageName);
+                    }
+                }
+                else
+                {
+                    listBoxPages.Items.Add(k_EmptyDataRetrieved);
                 }
             }
             catch (Exception exception)
@@ -169,9 +196,16 @@ namespace BasicFacebookFeatures
             {
                 List<string> userLikedGroups = r_FacebookLogicController.RetrieveGroups();
 
-                foreach (string likedGroupName in userLikedGroups)
+                if(userLikedGroups.Count > 0)
                 {
-                    listBoxGroups.Items.Add(likedGroupName);
+                    foreach (string likedGroupName in userLikedGroups)
+                    {
+                        listBoxGroups.Items.Add(likedGroupName);
+                    }
+                }
+                else
+                {
+                    listBoxGroups.Items.Add(k_EmptyDataRetrieved);
                 }
             }
             catch (Exception exception)
@@ -179,7 +213,5 @@ namespace BasicFacebookFeatures
                 MessageBox.Show(exception.Message);
             }
         }
-
-
     }
 }
