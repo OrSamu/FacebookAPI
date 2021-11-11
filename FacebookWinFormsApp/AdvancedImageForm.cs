@@ -13,27 +13,42 @@ using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using FacebookAppLogic;
 namespace BasicFacebookFeatures
 {
     public partial class AdvancedImageForm : Form
     {
-        private const string k_ShowPhotoComment = "Comments";
-        private const string k_ShowPhotoTags = "Tags";
-        private const string k_ShowPhotoLikedBy = "Liked By";
+        private readonly FacebookImages r_FacebookImages;
+        private const string k_NoAlbumPickedError = "Please choose an album";
         private const string k_SortByLikes = "Likes";
         private const string k_SortByCreationDate = "Creation Date";
-        User m_LoggedInUser;
-        List<Photo> m_Photos;
-        Photo m_SelectedPhoto;
+        private const string k_NoTaggedPickedError = "Please choose a tagged friend";
+        private const string k_NoPhotosFoundError = "No photos to retrieve :(";
 
         public AdvancedImageForm(User i_User)
         {
-            m_Photos = new List<Photo>();
-            m_LoggedInUser = i_User;
+            r_FacebookImages = new FacebookImages(i_User);
             InitializeComponent();
-            createAlbumListBox();
-            createFriendListBox();
+            createAlbumListBox(i_User);
+            createFriendListBox(i_User);
             this.PerformLayout();
+        }
+        private void createAlbumListBox(User i_User)
+        {
+            foreach (Album album in i_User.Albums)
+            {
+                m_ComboBoxAlbumsNames.Items.Add(album.Name);
+            }
+
+        }
+        private void createFriendListBox(User i_User)
+        {
+            foreach (User friendUser in i_User.Friends)
+            {
+                m_ComboBoxTaggedFriend.Items.Add(friendUser.Name);
+            }
+
+
         }
         private void m_CheckBoxDate_CheckedChanged(object sender, EventArgs e)
         {
@@ -53,141 +68,95 @@ namespace BasicFacebookFeatures
 
             m_ComboBoxAlbumsNames.Enabled = m_CheckBoxAlbum.Checked;
         }
-        private void createAlbumListBox()
+        private void m_CheckBoxTaggedFriends_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (Album album in m_LoggedInUser.Albums)
-            {
-                m_ComboBoxAlbumsNames.Items.Add(album.Name);
-            }
-
+            m_ComboBoxTaggedFriend.Enabled = m_CheckBoxTaggedFriends.Checked;
         }
-        private void createFriendListBox()
-        {
-            foreach (User friendUser in m_LoggedInUser.Friends)
-            {
-                m_ComboBoxTaggedFriend.Items.Add(friendUser.Name);
-            }
 
-
-        }
         private void m_ButtonSearch_Click(object sender, EventArgs e)
         {
-            int minAmountOfLikes = 0;
-            m_Photos.Clear();
-            Album albumToSearch = null;
-            string taggedFriend;
-            m_ComboBoxSortBy.Enabled = true;
-            try
-            {
-                if (m_CheckBoxLikes.Checked)
+            r_FacebookImages.Filters.ResetFilter();
+            if (fecthFilters(r_FacebookImages.Filters))
+            {                
+                try
                 {
+                    r_FacebookImages.FetchFilteredPhotos();
+                    m_FlowLayoutPanelImages.Controls.Clear();
+                    m_ListBoxPictureData.Items.Clear();
 
-                    minAmountOfLikes = (int)m_NumericUpDownLikes.Value;
-                }
-                else
-                {
-                    minAmountOfLikes = 0;
-                }
-                if (m_CheckBoxAlbum.Checked)
-                {
-                    albumToSearch = m_LoggedInUser.Albums[m_ComboBoxAlbumsNames.SelectedIndex];
-                }
-                if (m_CheckBoxTaggedFriends.Checked)
-                {
-                    taggedFriend = m_ComboBoxTaggedFriend.Text;
-                }
-                m_FlowLayoutPanelImages.Controls.Clear();
-                m_ListBoxPictureData.Items.Clear();
-                if (albumToSearch == null)
-                {
-                    foreach (Album album in m_LoggedInUser.Albums)
+                    if (r_FacebookImages.Photos.Count == 0)
                     {
-                        searchInAlbum(album, minAmountOfLikes);
-
-                    }
-
-                }
-                else
-                {
-                    searchInAlbum(albumToSearch, minAmountOfLikes);
-
-                }
-
-                if (m_Photos.Count == 0)
-                {
-                    MessageBox.Show("No photos to retrieve :(");
-                }
-                else
-                {
-                    addPhotoToListBoxImagePanel();
-                    m_ComboBoxSortBy.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-            }
-
-        }
-        private void searchInAlbum(Album i_Album, int i_MinAmountOfLikes)
-        {
-            foreach (Photo photo in i_Album.Photos)
-            {
-                if (photo.LikedBy.Count >= i_MinAmountOfLikes)
-                {
-                    if (m_CheckBoxTaggedFriends.Checked)
-                    {
-                        foreach (PhotoTag tag in photo.Tags)
-                        {
-                            if (tag.User.Name == m_ComboBoxTaggedFriend.Text)
-                            {
-                                if (m_CheckBoxDate.Checked)
-                                {
-                                    if (photo.CreatedTime >= m_DateTimePickerFromDate.Value && photo.CreatedTime <= m_DateTimePickerToDate.Value)
-                                    {
-                                        m_Photos.Add(photo);
-                                    }
-
-                                }
-                                else
-                                {
-                                    m_Photos.Add(photo);
-
-                                }
-
-                            }
-                        }
+                        MessageBox.Show(k_NoPhotosFoundError);
                     }
                     else
                     {
-                        if (m_CheckBoxDate.Checked)
-                        {
-                            if (photo.CreatedTime >= m_DateTimePickerFromDate.Value && photo.CreatedTime <= m_DateTimePickerToDate.Value)
-                            {
-                                m_Photos.Add(photo);
-                            }
-
-                        }
-                        else
-                        {
-                            m_Photos.Add(photo);
-
-                        }
-
+                        addPhotoToListBoxImagePanel();
+                        m_ComboBoxSortBy.Enabled = true;
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
 
                 }
             }
+   
 
         }
+
+        private bool fecthFilters(Filters i_Filters)
+        {
+            bool validInput = true;
+            if (m_CheckBoxLikes.Checked)
+            {
+
+                i_Filters.MinAmoutOfLikes = (int)m_NumericUpDownLikes.Value;
+            }
+
+            if(m_CheckBoxDate.Checked)
+            {
+                i_Filters.MinCreationDate = m_DateTimePickerFromDate.Value;
+                i_Filters.MaxCreationDate = m_DateTimePickerToDate.Value;
+            }
+
+            if (m_CheckBoxAlbum.Checked)
+            {
+                if(m_ComboBoxAlbumsNames.SelectedIndex!=-1)
+                {
+                    i_Filters.SelectedAlbumIndex= m_ComboBoxAlbumsNames.SelectedIndex;
+                }
+                else
+                {
+                    validInput = false;
+                    MessageBox.Show(k_NoAlbumPickedError);
+                }
+               
+            }
+
+            if (m_CheckBoxTaggedFriends.Checked)
+            {
+                if (m_ComboBoxTaggedFriend.SelectedIndex != -1)
+                {
+                    i_Filters.TaggedFriend= m_ComboBoxTaggedFriend.Text; 
+                }
+                else
+                {
+                    MessageBox.Show(k_NoTaggedPickedError);
+                    validInput = false;
+                }
+
+            }
+
+            return validInput;
+        }
+          
         private void addPhotoToListBoxImagePanel()
         {
             if (m_FlowLayoutPanelImages.Controls.Count != 0)
             {
                 m_FlowLayoutPanelImages.Controls.Clear();
             }
-            foreach (Photo photo in m_Photos)
+            foreach (Photo photo in r_FacebookImages.Photos)
             {
                 GridPhoto picture = new GridPhoto(photo);
                 picture.Click += Picture_Click;
@@ -199,18 +168,18 @@ namespace BasicFacebookFeatures
         {
             m_ComboBoxShow.Enabled = true;
 
-            m_SelectedPhoto = (sender as GridPhoto).Photo;
+            r_FacebookImages.SelectedPhoto = (sender as GridPhoto).Photo;
 
-            if (m_SelectedPhoto.PictureNormalURL != null)
+            if (r_FacebookImages.SelectedPhoto.PictureNormalURL != null)
             {
-                m_PictureBoxSelectedImage.LoadAsync(m_SelectedPhoto.PictureNormalURL);
+                m_PictureBoxSelectedImage.LoadAsync(r_FacebookImages.SelectedPhoto.PictureNormalURL);
             }
             else
             {
                 m_PictureBoxSelectedImage.Image = m_PictureBoxSelectedImage.ErrorImage;
             }
-            m_LabelLikes.Text = "Likes:" + m_SelectedPhoto.LikedBy.Count;
-            m_LabelComments.Text = "Comments:" + m_SelectedPhoto.Comments.Count;
+            m_LabelLikes.Text = "Likes:" + r_FacebookImages.SelectedPhoto.LikedBy.Count;
+            m_LabelComments.Text = "Comments:" + r_FacebookImages.SelectedPhoto.Comments.Count;
 
             updateListBoxData();
         }
@@ -220,68 +189,28 @@ namespace BasicFacebookFeatures
         {
             if (m_ComboBoxSortBy.Text == k_SortByCreationDate)
             {
-                sortPhotoListByCreatedTime();
+                r_FacebookImages.SortPhotoListByCreatedTime();
             }
 
             if (m_ComboBoxSortBy.Text == k_SortByLikes)
             {
-                sortPhotoListByLikes();
+                r_FacebookImages.SortPhotoListByLikes();
             }
             addPhotoToListBoxImagePanel();
         }
-        private void sortPhotoListByLikes()
-        {
 
-            m_Photos = m_Photos.OrderByDescending(o => o.LikedBy.Count).ToList();
-        }
-        private void sortPhotoListByCreatedTime()
-        {
-
-            m_Photos = m_Photos.OrderByDescending(o => o.CreatedTime).ToList();
-        }
         private void updateListBoxData()
         {
             m_ListBoxPictureData.Items.Clear();
-            if (m_SelectedPhoto != null)
+            List<string> imageData;
+            imageData = r_FacebookImages.SelectedImageData(m_ComboBoxShow.SelectedIndex);
+            if(imageData.Count!=0)
             {
-                if (m_ComboBoxShow.Text == k_ShowPhotoComment)
+                foreach (string data in imageData)
                 {
-                    if (m_SelectedPhoto.Comments != null)
-                    {
-                        foreach (Comment comment in m_SelectedPhoto.Comments)
-                        {
-                            m_ListBoxPictureData.Items.Add(comment.Message);
-                        }
-
-                    }
-
-
-                }
-                if (m_ComboBoxShow.Text == k_ShowPhotoLikedBy)
-                {
-                    if (m_SelectedPhoto.LikedBy != null)
-                    {
-                        foreach (User user in m_SelectedPhoto.LikedBy)
-                        {
-                            m_ListBoxPictureData.Items.Add(user.Name);
-                        }
-                    }
-
-
-                }
-                if (m_ComboBoxShow.Text == k_ShowPhotoTags)
-                {
-                    if (m_SelectedPhoto.Tags != null)
-                    {
-                        foreach (PhotoTag Tag in m_SelectedPhoto.Tags)
-                        {
-                            m_ListBoxPictureData.Items.Add(Tag.User.Name);
-                        }
-                    }
-
+                    m_ListBoxPictureData.Items.Add(data);
                 }
             }
-
         }
 
 
@@ -290,10 +219,7 @@ namespace BasicFacebookFeatures
             updateListBoxData();
         }
 
-        private void m_CheckBoxTaggedFriens_CheckedChanged(object sender, EventArgs e)
-        {
-            m_ComboBoxTaggedFriend.Enabled = m_CheckBoxTaggedFriends.Checked;
-        }
+
 
     }
 }
