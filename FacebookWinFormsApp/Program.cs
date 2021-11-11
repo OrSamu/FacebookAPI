@@ -18,9 +18,7 @@ namespace BasicFacebookFeatures
             FacebookService.s_UseForamttedToStrings = true;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
-            //FacebookWrapper.FacebookService.LoginWithIE("419379036219598", "idk");
-          
+            Application.Run(new LoginForm());
         }
     }
 }
