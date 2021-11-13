@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookAppLogic;
-using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
@@ -42,8 +35,8 @@ namespace BasicFacebookFeatures
         {
             r_UserfacebooksFriends.PickRandomFriend();
             randomFriendPictureBox.ImageLocation = r_UserfacebooksFriends.RandomFriend.PictureNormalURL;
-            randomFriendNameLabel.Text = r_UserfacebooksFriends.RandomFriend.FirstName +
-                                         ' ' + r_UserfacebooksFriends.RandomFriend.LastName;
+            randomFriendNameLabel.Text = r_UserfacebooksFriends.RandomFriend.FirstName + ' '
+                                         + r_UserfacebooksFriends.RandomFriend.LastName;
         }
 
         private void retrieveAnswersForQuiz()
@@ -81,7 +74,7 @@ namespace BasicFacebookFeatures
             {
                 m_FriendsBirthday = r_UserfacebooksFriends.RandomFriend.Birthday;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show("Error - failed to retrieve friend's birthday");
             }
@@ -93,7 +86,7 @@ namespace BasicFacebookFeatures
             {
                 m_FriendsCity = r_UserfacebooksFriends.RandomFriend.Location.Location.City;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show("Error - failed to retrieve friend's city");
             }
@@ -105,7 +98,7 @@ namespace BasicFacebookFeatures
             {
                 m_FriendsCountry = r_UserfacebooksFriends.RandomFriend.Location.Location.Country;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show("Error - failed to retrieve friend's country");
             }
@@ -117,7 +110,7 @@ namespace BasicFacebookFeatures
             {
                 m_FriendsRelationshipStatus = r_UserfacebooksFriends.RandomFriend.RelationshipStatus.ToString();
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show("Error - failed to retrieve friend's relationship status");
             }

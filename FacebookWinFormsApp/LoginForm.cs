@@ -19,6 +19,11 @@ namespace BasicFacebookFeatures
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            login();
+        }
+
+        private void login()
+        {
             bool isAccessTokenEmpty = true;
             LoginResult loginResult = FacebookService.Login(
                 "973153713605868",
