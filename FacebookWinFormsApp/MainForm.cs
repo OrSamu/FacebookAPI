@@ -12,8 +12,6 @@ namespace BasicFacebookFeatures
         private const string k_DefaultStatusText = "What's on your mind?";
         private const string k_ErrorForTryingToPostEmptyStatus = "Error - can't post empty status";
 
-
-
         private readonly LoginForm r_LoginForm;
         private readonly FacebookLogicController r_FacebookLogicController;
         

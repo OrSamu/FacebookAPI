@@ -36,7 +36,7 @@ namespace BasicFacebookFeatures
             this.cityLabel = new System.Windows.Forms.Label();
             this.cityTextBox = new System.Windows.Forms.TextBox();
             this.relationshipTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.relationshipLabel = new System.Windows.Forms.Label();
             this.countryTextBox = new System.Windows.Forms.TextBox();
             this.countryLabel = new System.Windows.Forms.Label();
             this.checkButton = new System.Windows.Forms.Button();
@@ -116,15 +116,15 @@ namespace BasicFacebookFeatures
             this.relationshipTextBox.Size = new System.Drawing.Size(120, 20);
             this.relationshipTextBox.TabIndex = 11;
             // 
-            // label4
+            // relationshipLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(180, 177);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Relationship Status";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.relationshipLabel.AutoSize = true;
+            this.relationshipLabel.Location = new System.Drawing.Point(180, 177);
+            this.relationshipLabel.Name = "relationshipLabel";
+            this.relationshipLabel.Size = new System.Drawing.Size(98, 13);
+            this.relationshipLabel.TabIndex = 10;
+            this.relationshipLabel.Text = "Relationship Status";
+            this.relationshipLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // countryTextBox
             // 
@@ -214,7 +214,7 @@ namespace BasicFacebookFeatures
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkButton);
             this.Controls.Add(this.relationshipTextBox);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.relationshipLabel);
             this.Controls.Add(this.countryTextBox);
             this.Controls.Add(this.countryLabel);
             this.Controls.Add(this.cityTextBox);
@@ -247,7 +247,7 @@ namespace BasicFacebookFeatures
         private System.Windows.Forms.Label cityLabel;
         private System.Windows.Forms.TextBox cityTextBox;
         private System.Windows.Forms.TextBox relationshipTextBox;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label relationshipLabel;
         private System.Windows.Forms.TextBox countryTextBox;
         private System.Windows.Forms.Label countryLabel;
         private System.Windows.Forms.Button checkButton;
