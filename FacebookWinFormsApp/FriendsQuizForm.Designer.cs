@@ -41,14 +41,14 @@ namespace BasicFacebookFeatures
             this.countryLabel = new System.Windows.Forms.Label();
             this.checkButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.friendsQuizHeadLabel = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.randomFriendPictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
+            this.friendsQuizHeadLabel = new System.Windows.Forms.Label();
+            this.randomFriendPictureBox = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.randomFriendPictureBox)).BeginInit();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // randomizeFriendButton
@@ -165,16 +165,15 @@ namespace BasicFacebookFeatures
             this.panel1.Size = new System.Drawing.Size(309, 55);
             this.panel1.TabIndex = 13;
             // 
-            // friendsQuizHeadLabel
+            // panel2
             // 
-            this.friendsQuizHeadLabel.AutoSize = true;
-            this.friendsQuizHeadLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.friendsQuizHeadLabel.ForeColor = System.Drawing.Color.White;
-            this.friendsQuizHeadLabel.Location = new System.Drawing.Point(90, 24);
-            this.friendsQuizHeadLabel.Name = "friendsQuizHeadLabel";
-            this.friendsQuizHeadLabel.Size = new System.Drawing.Size(150, 29);
-            this.friendsQuizHeadLabel.TabIndex = 15;
-            this.friendsQuizHeadLabel.Text = "Friends Quiz";
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.logoPictureBox);
+            this.panel2.Location = new System.Drawing.Point(3, 5);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(45, 45);
+            this.panel2.TabIndex = 16;
             // 
             // logoPictureBox
             // 
@@ -187,6 +186,17 @@ namespace BasicFacebookFeatures
             this.logoPictureBox.TabIndex = 14;
             this.logoPictureBox.TabStop = false;
             // 
+            // friendsQuizHeadLabel
+            // 
+            this.friendsQuizHeadLabel.AutoSize = true;
+            this.friendsQuizHeadLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.friendsQuizHeadLabel.ForeColor = System.Drawing.Color.White;
+            this.friendsQuizHeadLabel.Location = new System.Drawing.Point(90, 24);
+            this.friendsQuizHeadLabel.Name = "friendsQuizHeadLabel";
+            this.friendsQuizHeadLabel.Size = new System.Drawing.Size(150, 29);
+            this.friendsQuizHeadLabel.TabIndex = 15;
+            this.friendsQuizHeadLabel.Text = "Friends Quiz";
+            // 
             // randomFriendPictureBox
             // 
             this.randomFriendPictureBox.Location = new System.Drawing.Point(12, 74);
@@ -194,16 +204,6 @@ namespace BasicFacebookFeatures
             this.randomFriendPictureBox.Size = new System.Drawing.Size(120, 100);
             this.randomFriendPictureBox.TabIndex = 1;
             this.randomFriendPictureBox.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.logoPictureBox);
-            this.panel2.Location = new System.Drawing.Point(3, 5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(45, 45);
-            this.panel2.TabIndex = 16;
             // 
             // FriendsQuizForm
             // 
@@ -225,12 +225,13 @@ namespace BasicFacebookFeatures
             this.Controls.Add(this.randomFriendPictureBox);
             this.Controls.Add(this.randomizeFriendButton);
             this.Name = "FriendsQuizForm";
-            this.Text = "FriendsQuizUi";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Friends Quiz";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.randomFriendPictureBox)).EndInit();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

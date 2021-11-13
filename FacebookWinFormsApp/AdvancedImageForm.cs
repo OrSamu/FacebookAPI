@@ -218,8 +218,5 @@ namespace BasicFacebookFeatures
         {
             updateListBoxData();
         }
-
-
-
     }
 }

@@ -19,16 +19,36 @@ namespace BasicFacebookFeatures
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            try
+            bool isAccessTokenEmpty = true;
+            LoginResult loginResult = FacebookService.Login(
+                "973153713605868",
+
+                "user_likes",
+                "user_photos",
+                "user_posts",
+                "user_friends",
+                "user_birthday",
+                "user_gender",
+                "user_videos",
+                "user_link",
+                "user_events",
+                "user_hometown",
+                "user_location",
+                "groups_access_member_info",
+                "email");
+
+            isAccessTokenEmpty = string.IsNullOrEmpty(loginResult.AccessToken);
+            if (!isAccessTokenEmpty)
             {
                 Form mainForm;
-                r_FacebookLogicController.Login();
+
+                r_FacebookLogicController.LoggedInUser = loginResult.LoggedInUser;
                 mainForm = new MainForm(this, r_FacebookLogicController);
                 mainForm.ShowDialog();
             }
-            catch (Exception exception)
+            else
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Login failed - please try again");
             }
         }
 

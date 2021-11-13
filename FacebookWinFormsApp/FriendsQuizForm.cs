@@ -14,16 +14,20 @@ namespace BasicFacebookFeatures
 {
     public partial class FriendsQuizForm : Form
     {
+        private const string k_QuizCheckError = "You should run a new quiz to do that";
+
         private readonly FacebooksFriends r_UserfacebooksFriends;
         private string m_FriendsBirthday;
         private string m_FriendsCity;
         private string m_FriendsCountry;
         private string m_FriendsRelationshipStatus;
+        private bool m_QuizInProgress;
 
         public FriendsQuizForm(FacebookLogicController i_FacebookLogicController)
         {
             InitializeComponent();
             r_UserfacebooksFriends = new FacebooksFriends(i_FacebookLogicController);
+            m_QuizInProgress = false;
         }
 
         private void randomizeFriendButton_Click(object sender, EventArgs e)
@@ -31,6 +35,7 @@ namespace BasicFacebookFeatures
             pickAndShowRandomFriend();
             retrieveAnswersForQuiz();
             enableAndClearAnswersTextBoxes();
+            m_QuizInProgress = true;
         }
 
         private void pickAndShowRandomFriend()
@@ -67,6 +72,7 @@ namespace BasicFacebookFeatures
             cityTextBox.Enabled = false;
             countryTextBox.Enabled = false;
             relationshipTextBox.Enabled = false;
+            m_QuizInProgress = false;
         }
 
         private void retrieveFriendsBirthday()
@@ -119,8 +125,15 @@ namespace BasicFacebookFeatures
 
         private void checkButton_Click(object sender, EventArgs e)
         {
-            disableAnswersTextBoxes();
-            MessageBox.Show(getQuizAnswersMessage());
+            if(m_QuizInProgress)
+            {
+                disableAnswersTextBoxes();
+                MessageBox.Show(getQuizAnswersMessage());
+            }
+            else
+            {
+                MessageBox.Show(k_QuizCheckError);
+            }
         }
 
         private string getQuizAnswersMessage()

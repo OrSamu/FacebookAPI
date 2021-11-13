@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using CefSharp.DevTools.Database;
 using FacebookAppLogic;
 
 namespace BasicFacebookFeatures
 {
     public partial class MainForm : Form
     {
-        //private const string k_SuccessfulPostPublish = "Post published successfully";
         private const string k_EmptyDataRetrieved = "No data to show";
         private const string k_DefaultStatusText = "What's on your mind?";
+        private const string k_ErrorForTryingToPostEmptyStatus = "Error - can't post empty status";
+
+
 
         private readonly LoginForm r_LoginForm;
         private readonly FacebookLogicController r_FacebookLogicController;
@@ -77,7 +74,7 @@ namespace BasicFacebookFeatures
             {
                 if(isStatusEmpty)
                 {
-                    MessageBox.Show("Error - can't post empty status");
+                    MessageBox.Show(k_ErrorForTryingToPostEmptyStatus);
                 }
 
                 r_FacebookLogicController.PostStatus(statusTextBox.Text);
@@ -90,7 +87,7 @@ namespace BasicFacebookFeatures
             finally
             {
                 postButton.Enabled = false;
-                statusTextBox.Text = "What's on your mind?";
+                statusTextBox.Text = k_DefaultStatusText;
             }
         }
 
@@ -120,6 +117,7 @@ namespace BasicFacebookFeatures
 
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
+            listBoxComments.Items.Clear();
             try
             {
                 List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
@@ -144,6 +142,7 @@ namespace BasicFacebookFeatures
 
         private void showUserEvents()
         {
+            listBoxEvents.Items.Clear();
             try
             {
                 List<string> userEvents = r_FacebookLogicController.RetrieveEvents();
@@ -168,6 +167,7 @@ namespace BasicFacebookFeatures
 
         private void showUserPages()
         {
+            listBoxPages.Items.Clear();
             try
             {
                 List<string> userLikedPages = r_FacebookLogicController.RetrievePages();
@@ -192,6 +192,7 @@ namespace BasicFacebookFeatures
 
         private void showUserGroups()
         {
+            listBoxGroups.Items.Clear();
             try
             {
                 List<string> userLikedGroups = r_FacebookLogicController.RetrieveGroups();
