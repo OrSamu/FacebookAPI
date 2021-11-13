@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FacebookAppLogic;
-using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
     public partial class FriendsQuizForm : Form
     {
+        private const string k_QuizCheckError = "You should run a new quiz to do that";
+
         private readonly FacebooksFriends r_UserfacebooksFriends;
         private string m_FriendsBirthday;
         private string m_FriendsCity;
         private string m_FriendsCountry;
         private string m_FriendsRelationshipStatus;
+        private bool m_QuizInProgress;
 
         public FriendsQuizForm(FacebookLogicController i_FacebookLogicController)
         {
             InitializeComponent();
             r_UserfacebooksFriends = new FacebooksFriends(i_FacebookLogicController);
+            m_QuizInProgress = false;
         }
 
         private void randomizeFriendButton_Click(object sender, EventArgs e)
@@ -31,14 +28,15 @@ namespace BasicFacebookFeatures
             pickAndShowRandomFriend();
             retrieveAnswersForQuiz();
             enableAndClearAnswersTextBoxes();
+            m_QuizInProgress = true;
         }
 
         private void pickAndShowRandomFriend()
         {
             r_UserfacebooksFriends.PickRandomFriend();
             randomFriendPictureBox.ImageLocation = r_UserfacebooksFriends.RandomFriend.PictureNormalURL;
-            randomFriendNameLabel.Text = r_UserfacebooksFriends.RandomFriend.FirstName +
-                                         ' ' + r_UserfacebooksFriends.RandomFriend.LastName;
+            randomFriendNameLabel.Text = r_UserfacebooksFriends.RandomFriend.FirstName + ' '
+                                         + r_UserfacebooksFriends.RandomFriend.LastName;
         }
 
         private void retrieveAnswersForQuiz()
@@ -67,6 +65,7 @@ namespace BasicFacebookFeatures
             cityTextBox.Enabled = false;
             countryTextBox.Enabled = false;
             relationshipTextBox.Enabled = false;
+            m_QuizInProgress = false;
         }
 
         private void retrieveFriendsBirthday()
@@ -75,7 +74,7 @@ namespace BasicFacebookFeatures
             {
                 m_FriendsBirthday = r_UserfacebooksFriends.RandomFriend.Birthday;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show("Error - failed to retrieve friend's birthday");
             }
@@ -87,7 +86,7 @@ namespace BasicFacebookFeatures
             {
                 m_FriendsCity = r_UserfacebooksFriends.RandomFriend.Location.Location.City;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show("Error - failed to retrieve friend's city");
             }
@@ -99,7 +98,7 @@ namespace BasicFacebookFeatures
             {
                 m_FriendsCountry = r_UserfacebooksFriends.RandomFriend.Location.Location.Country;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show("Error - failed to retrieve friend's country");
             }
@@ -111,7 +110,7 @@ namespace BasicFacebookFeatures
             {
                 m_FriendsRelationshipStatus = r_UserfacebooksFriends.RandomFriend.RelationshipStatus.ToString();
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show("Error - failed to retrieve friend's relationship status");
             }
@@ -119,8 +118,15 @@ namespace BasicFacebookFeatures
 
         private void checkButton_Click(object sender, EventArgs e)
         {
-            disableAnswersTextBoxes();
-            MessageBox.Show(getQuizAnswersMessage());
+            if(m_QuizInProgress)
+            {
+                disableAnswersTextBoxes();
+                MessageBox.Show(getQuizAnswersMessage());
+            }
+            else
+            {
+                MessageBox.Show(k_QuizCheckError);
+            }
         }
 
         private string getQuizAnswersMessage()

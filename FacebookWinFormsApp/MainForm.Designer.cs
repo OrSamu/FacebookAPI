@@ -34,7 +34,7 @@ namespace BasicFacebookFeatures
             this.logoutButton = new System.Windows.Forms.Button();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.AdvancedImageSearch = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.headlineBluePanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.mainFormHeadLabel = new System.Windows.Forms.Label();
@@ -45,8 +45,11 @@ namespace BasicFacebookFeatures
             this.listBoxEvents = new System.Windows.Forms.ListBox();
             this.listBoxGroups = new System.Windows.Forms.ListBox();
             this.listBoxPages = new System.Windows.Forms.ListBox();
+            this.eventsLabel = new System.Windows.Forms.Label();
+            this.pagesLabel = new System.Windows.Forms.Label();
+            this.groupsLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.headlineBluePanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -99,20 +102,20 @@ namespace BasicFacebookFeatures
             this.AdvancedImageSearch.Name = "AdvancedImageSearch";
             this.AdvancedImageSearch.Size = new System.Drawing.Size(88, 23);
             this.AdvancedImageSearch.TabIndex = 4;
-            this.AdvancedImageSearch.Text = "Image Filters";
+            this.AdvancedImageSearch.Text = "Image Search";
             this.AdvancedImageSearch.UseVisualStyleBackColor = true;
             this.AdvancedImageSearch.Click += new System.EventHandler(this.AdvancedImageSearch_Click);
             // 
-            // panel1
+            // headlineBluePanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(89)))), ((int)(((byte)(152)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.mainFormHeadLabel);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(691, 55);
-            this.panel1.TabIndex = 14;
+            this.headlineBluePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(89)))), ((int)(((byte)(152)))));
+            this.headlineBluePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.headlineBluePanel.Controls.Add(this.panel2);
+            this.headlineBluePanel.Controls.Add(this.mainFormHeadLabel);
+            this.headlineBluePanel.Location = new System.Drawing.Point(0, 0);
+            this.headlineBluePanel.Name = "headlineBluePanel";
+            this.headlineBluePanel.Size = new System.Drawing.Size(691, 55);
+            this.headlineBluePanel.TabIndex = 14;
             // 
             // panel2
             // 
@@ -188,7 +191,7 @@ namespace BasicFacebookFeatures
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxEvents.DisplayMember = "name";
             this.listBoxEvents.FormattingEnabled = true;
-            this.listBoxEvents.Location = new System.Drawing.Point(14, 305);
+            this.listBoxEvents.Location = new System.Drawing.Point(14, 315);
             this.listBoxEvents.Name = "listBoxEvents";
             this.listBoxEvents.Size = new System.Drawing.Size(200, 147);
             this.listBoxEvents.TabIndex = 41;
@@ -199,7 +202,7 @@ namespace BasicFacebookFeatures
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxGroups.DisplayMember = "name";
             this.listBoxGroups.FormattingEnabled = true;
-            this.listBoxGroups.Location = new System.Drawing.Point(460, 305);
+            this.listBoxGroups.Location = new System.Drawing.Point(460, 315);
             this.listBoxGroups.Name = "listBoxGroups";
             this.listBoxGroups.Size = new System.Drawing.Size(200, 147);
             this.listBoxGroups.TabIndex = 42;
@@ -210,16 +213,46 @@ namespace BasicFacebookFeatures
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxPages.DisplayMember = "name";
             this.listBoxPages.FormattingEnabled = true;
-            this.listBoxPages.Location = new System.Drawing.Point(237, 305);
+            this.listBoxPages.Location = new System.Drawing.Point(237, 315);
             this.listBoxPages.Name = "listBoxPages";
             this.listBoxPages.Size = new System.Drawing.Size(200, 147);
             this.listBoxPages.TabIndex = 43;
+            // 
+            // eventsLabel
+            // 
+            this.eventsLabel.AutoSize = true;
+            this.eventsLabel.Location = new System.Drawing.Point(12, 299);
+            this.eventsLabel.Name = "eventsLabel";
+            this.eventsLabel.Size = new System.Drawing.Size(43, 13);
+            this.eventsLabel.TabIndex = 44;
+            this.eventsLabel.Text = "Events:";
+            // 
+            // pagesLabel
+            // 
+            this.pagesLabel.AutoSize = true;
+            this.pagesLabel.Location = new System.Drawing.Point(234, 299);
+            this.pagesLabel.Name = "pagesLabel";
+            this.pagesLabel.Size = new System.Drawing.Size(40, 13);
+            this.pagesLabel.TabIndex = 45;
+            this.pagesLabel.Text = "Pages:";
+            // 
+            // groupsLabel
+            // 
+            this.groupsLabel.AutoSize = true;
+            this.groupsLabel.Location = new System.Drawing.Point(457, 299);
+            this.groupsLabel.Name = "groupsLabel";
+            this.groupsLabel.Size = new System.Drawing.Size(44, 13);
+            this.groupsLabel.TabIndex = 46;
+            this.groupsLabel.Text = "Groups:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(690, 473);
+            this.Controls.Add(this.groupsLabel);
+            this.Controls.Add(this.pagesLabel);
+            this.Controls.Add(this.eventsLabel);
             this.Controls.Add(this.listBoxPages);
             this.Controls.Add(this.listBoxGroups);
             this.Controls.Add(this.listBoxEvents);
@@ -227,17 +260,18 @@ namespace BasicFacebookFeatures
             this.Controls.Add(this.postButton);
             this.Controls.Add(this.statusTextBox);
             this.Controls.Add(this.listBoxPosts);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.headlineBluePanel);
             this.Controls.Add(this.AdvancedImageSearch);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.friendsGameButton);
             this.Controls.Add(this.profilePictureBox);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Facebook Application";
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.headlineBluePanel.ResumeLayout(false);
+            this.headlineBluePanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -252,7 +286,7 @@ namespace BasicFacebookFeatures
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Button AdvancedImageSearch;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel headlineBluePanel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Label mainFormHeadLabel;
@@ -263,5 +297,8 @@ namespace BasicFacebookFeatures
         private System.Windows.Forms.ListBox listBoxEvents;
         private System.Windows.Forms.ListBox listBoxGroups;
         private System.Windows.Forms.ListBox listBoxPages;
+        private System.Windows.Forms.Label eventsLabel;
+        private System.Windows.Forms.Label pagesLabel;
+        private System.Windows.Forms.Label groupsLabel;
     }
 }

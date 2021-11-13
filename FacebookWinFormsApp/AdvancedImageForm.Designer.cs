@@ -29,328 +29,371 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.m_ComboBoxShow = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.m_LabelAdvancedImageSearch = new System.Windows.Forms.Label();
-            this.m_ComboBoxSortBy = new System.Windows.Forms.ComboBox();
-            this.m_CheckBoxAlbum = new System.Windows.Forms.CheckBox();
-            this.m_CheckBoxLikes = new System.Windows.Forms.CheckBox();
-            this.m_CheckBoxDate = new System.Windows.Forms.CheckBox();
-            this.m_ListBoxPictureData = new System.Windows.Forms.ListBox();
-            this.m_ComboBoxAlbumsNames = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.m_LabelTo = new System.Windows.Forms.Label();
-            this.m_LabelFrom = new System.Windows.Forms.Label();
-            this.m_DateTimePickerToDate = new System.Windows.Forms.DateTimePicker();
+            this.comboBoxShow = new System.Windows.Forms.ComboBox();
+            this.backgroundPanel = new System.Windows.Forms.Panel();
+            this.labelAdvancedImageSearch = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
+            this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
+            this.checkBoxAlbum = new System.Windows.Forms.CheckBox();
+            this.checkBoxLikes = new System.Windows.Forms.CheckBox();
+            this.checkBoxDate = new System.Windows.Forms.CheckBox();
+            this.listBoxPictureData = new System.Windows.Forms.ListBox();
+            this.comboBoxAlbumsNames = new System.Windows.Forms.ComboBox();
+            this.taggedFriendLabel = new System.Windows.Forms.Label();
+            this.fromAlbumLabel = new System.Windows.Forms.Label();
+            this.toLabel = new System.Windows.Forms.Label();
+            this.labelFrom = new System.Windows.Forms.Label();
+            this.dateTimePickerToDate = new System.Windows.Forms.DateTimePicker();
             this.m_DateTimePickerFromDate = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.m_PictureBoxSelectedImage = new System.Windows.Forms.PictureBox();
-            this.m_ButtonSearch = new System.Windows.Forms.Button();
+            this.minLikesLabel = new System.Windows.Forms.Label();
+            this.pictureBoxSelectedImage = new System.Windows.Forms.PictureBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.m_LabelLikes = new System.Windows.Forms.Label();
-            this.m_LabelComments = new System.Windows.Forms.Label();
-            this.m_CheckBoxTaggedFriends = new System.Windows.Forms.CheckBox();
-            this.m_ComboBoxTaggedFriend = new System.Windows.Forms.ComboBox();
-            this.m_NumericUpDownLikes = new System.Windows.Forms.NumericUpDown();
-            this.m_FlowLayoutPanelImages = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelLikes = new System.Windows.Forms.Label();
+            this.labelComments = new System.Windows.Forms.Label();
+            this.checkBoxTaggedFriends = new System.Windows.Forms.CheckBox();
+            this.comboBoxTaggedFriend = new System.Windows.Forms.ComboBox();
+            this.numericUpDownLikes = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanelImages = new System.Windows.Forms.FlowLayoutPanel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxSelectedImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.m_NumericUpDownLikes)).BeginInit();
+            this.backgroundPanel.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLikes)).BeginInit();
             this.SuspendLayout();
             // 
-            // m_ComboBoxShow
+            // comboBoxShow
             // 
-            this.m_ComboBoxShow.Enabled = false;
-            this.m_ComboBoxShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_ComboBoxShow.FormattingEnabled = true;
-            this.m_ComboBoxShow.Items.AddRange(new object[] {
+            this.comboBoxShow.Enabled = false;
+            this.comboBoxShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxShow.FormattingEnabled = true;
+            this.comboBoxShow.Items.AddRange(new object[] {
             "Comments",
             "Liked By",
             "Tags"});
-            this.m_ComboBoxShow.Location = new System.Drawing.Point(1414, 549);
-            this.m_ComboBoxShow.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.m_ComboBoxShow.Name = "m_ComboBoxShow";
-            this.m_ComboBoxShow.Size = new System.Drawing.Size(534, 24);
-            this.m_ComboBoxShow.TabIndex = 45;
-            this.m_ComboBoxShow.Text = "show";
-            this.m_ComboBoxShow.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.comboBoxShow.Location = new System.Drawing.Point(363, 382);
+            this.comboBoxShow.Name = "comboBoxShow";
+            this.comboBoxShow.Size = new System.Drawing.Size(357, 24);
+            this.comboBoxShow.TabIndex = 45;
+            this.comboBoxShow.Text = "show";
+            this.comboBoxShow.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
-            // panel1
+            // backgroundPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel1.Controls.Add(this.m_LabelAdvancedImageSearch);
-            this.panel1.Location = new System.Drawing.Point(-4, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(2050, 126);
-            this.panel1.TabIndex = 44;
+            this.backgroundPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(89)))), ((int)(((byte)(152)))));
+            this.backgroundPanel.Controls.Add(this.labelAdvancedImageSearch);
+            this.backgroundPanel.Controls.Add(this.panel2);
+            this.backgroundPanel.Location = new System.Drawing.Point(2, 1);
+            this.backgroundPanel.Name = "backgroundPanel";
+            this.backgroundPanel.Size = new System.Drawing.Size(741, 82);
+            this.backgroundPanel.TabIndex = 44;
             // 
-            // m_LabelAdvancedImageSearch
+            // labelAdvancedImageSearch
             // 
-            this.m_LabelAdvancedImageSearch.AutoSize = true;
-            this.m_LabelAdvancedImageSearch.Font = new System.Drawing.Font("Archivo Black", 24.28F);
-            this.m_LabelAdvancedImageSearch.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.m_LabelAdvancedImageSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_LabelAdvancedImageSearch.Location = new System.Drawing.Point(8, 42);
-            this.m_LabelAdvancedImageSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.m_LabelAdvancedImageSearch.Name = "m_LabelAdvancedImageSearch";
-            this.m_LabelAdvancedImageSearch.Size = new System.Drawing.Size(453, 46);
-            this.m_LabelAdvancedImageSearch.TabIndex = 0;
-            this.m_LabelAdvancedImageSearch.Text = "Advanced image search";
+            this.labelAdvancedImageSearch.AutoSize = true;
+            this.labelAdvancedImageSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 24.28F);
+            this.labelAdvancedImageSearch.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.labelAdvancedImageSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelAdvancedImageSearch.Location = new System.Drawing.Point(107, 36);
+            this.labelAdvancedImageSearch.Name = "labelAdvancedImageSearch";
+            this.labelAdvancedImageSearch.Size = new System.Drawing.Size(374, 38);
+            this.labelAdvancedImageSearch.TabIndex = 0;
+            this.labelAdvancedImageSearch.Text = "Advanced Image Search";
             // 
-            // m_ComboBoxSortBy
+            // panel2
             // 
-            this.m_ComboBoxSortBy.Enabled = false;
-            this.m_ComboBoxSortBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_ComboBoxSortBy.FormattingEnabled = true;
-            this.m_ComboBoxSortBy.Items.AddRange(new object[] {
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.logoPictureBox);
+            this.panel2.Location = new System.Drawing.Point(34, 9);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(52, 66);
+            this.panel2.TabIndex = 54;
+            // 
+            // logoPictureBox
+            // 
+            this.logoPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.logoPictureBox.Image = global::BasicFacebookFeatures.Properties.Resources.FBSmallLogo;
+            this.logoPictureBox.Location = new System.Drawing.Point(-16, -1);
+            this.logoPictureBox.Name = "logoPictureBox";
+            this.logoPictureBox.Size = new System.Drawing.Size(72, 65);
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logoPictureBox.TabIndex = 15;
+            this.logoPictureBox.TabStop = false;
+            // 
+            // comboBoxSortBy
+            // 
+            this.comboBoxSortBy.Enabled = false;
+            this.comboBoxSortBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxSortBy.FormattingEnabled = true;
+            this.comboBoxSortBy.Items.AddRange(new object[] {
             "Creation Date",
             "Likes"});
-            this.m_ComboBoxSortBy.Location = new System.Drawing.Point(588, 137);
-            this.m_ComboBoxSortBy.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.m_ComboBoxSortBy.Name = "m_ComboBoxSortBy";
-            this.m_ComboBoxSortBy.Size = new System.Drawing.Size(178, 24);
-            this.m_ComboBoxSortBy.TabIndex = 41;
-            this.m_ComboBoxSortBy.Text = "Sort by:";
-            this.m_ComboBoxSortBy.SelectedIndexChanged += new System.EventHandler(this.m_ComboBoxSortBy_SelectedIndexChanged);
+            this.comboBoxSortBy.Location = new System.Drawing.Point(10, 308);
+            this.comboBoxSortBy.Name = "comboBoxSortBy";
+            this.comboBoxSortBy.Size = new System.Drawing.Size(120, 24);
+            this.comboBoxSortBy.TabIndex = 41;
+            this.comboBoxSortBy.Text = "Sort by:";
+            this.comboBoxSortBy.SelectedIndexChanged += new System.EventHandler(this.m_ComboBoxSortBy_SelectedIndexChanged);
             // 
-            // m_CheckBoxAlbum
+            // checkBoxAlbum
             // 
-            this.m_CheckBoxAlbum.AutoSize = true;
-            this.m_CheckBoxAlbum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_CheckBoxAlbum.Location = new System.Drawing.Point(48, 438);
-            this.m_CheckBoxAlbum.Name = "m_CheckBoxAlbum";
-            this.m_CheckBoxAlbum.Size = new System.Drawing.Size(15, 14);
-            this.m_CheckBoxAlbum.TabIndex = 40;
-            this.m_CheckBoxAlbum.UseVisualStyleBackColor = true;
-            this.m_CheckBoxAlbum.CheckedChanged += new System.EventHandler(this.m_CheckBoxAlbum_CheckedChanged);
+            this.checkBoxAlbum.AutoSize = true;
+            this.checkBoxAlbum.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.checkBoxAlbum.Location = new System.Drawing.Point(10, 186);
+            this.checkBoxAlbum.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxAlbum.Name = "checkBoxAlbum";
+            this.checkBoxAlbum.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxAlbum.TabIndex = 40;
+            this.checkBoxAlbum.UseVisualStyleBackColor = true;
+            this.checkBoxAlbum.CheckedChanged += new System.EventHandler(this.m_CheckBoxAlbum_CheckedChanged);
             // 
-            // m_CheckBoxLikes
+            // checkBoxLikes
             // 
-            this.m_CheckBoxLikes.AutoSize = true;
-            this.m_CheckBoxLikes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_CheckBoxLikes.Location = new System.Drawing.Point(48, 397);
-            this.m_CheckBoxLikes.Name = "m_CheckBoxLikes";
-            this.m_CheckBoxLikes.Size = new System.Drawing.Size(15, 14);
-            this.m_CheckBoxLikes.TabIndex = 39;
-            this.m_CheckBoxLikes.UseVisualStyleBackColor = true;
-            this.m_CheckBoxLikes.CheckedChanged += new System.EventHandler(this.m_CheckBoxLikes_CheckedChanged);
+            this.checkBoxLikes.AutoSize = true;
+            this.checkBoxLikes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.checkBoxLikes.Location = new System.Drawing.Point(10, 158);
+            this.checkBoxLikes.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxLikes.Name = "checkBoxLikes";
+            this.checkBoxLikes.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxLikes.TabIndex = 39;
+            this.checkBoxLikes.UseVisualStyleBackColor = true;
+            this.checkBoxLikes.CheckedChanged += new System.EventHandler(this.m_CheckBoxLikes_CheckedChanged);
             // 
-            // m_CheckBoxDate
+            // checkBoxDate
             // 
-            this.m_CheckBoxDate.AutoSize = true;
-            this.m_CheckBoxDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_CheckBoxDate.Location = new System.Drawing.Point(48, 346);
-            this.m_CheckBoxDate.Name = "m_CheckBoxDate";
-            this.m_CheckBoxDate.Size = new System.Drawing.Size(15, 14);
-            this.m_CheckBoxDate.TabIndex = 38;
-            this.m_CheckBoxDate.UseVisualStyleBackColor = true;
-            this.m_CheckBoxDate.CheckedChanged += new System.EventHandler(this.m_CheckBoxDate_CheckedChanged);
+            this.checkBoxDate.AutoSize = true;
+            this.checkBoxDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.checkBoxDate.Location = new System.Drawing.Point(10, 129);
+            this.checkBoxDate.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxDate.Name = "checkBoxDate";
+            this.checkBoxDate.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxDate.TabIndex = 38;
+            this.checkBoxDate.UseVisualStyleBackColor = true;
+            this.checkBoxDate.CheckedChanged += new System.EventHandler(this.m_CheckBoxDate_CheckedChanged);
             // 
-            // m_ListBoxPictureData
+            // listBoxPictureData
             // 
-            this.m_ListBoxPictureData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_ListBoxPictureData.FormattingEnabled = true;
-            this.m_ListBoxPictureData.ItemHeight = 16;
-            this.m_ListBoxPictureData.Location = new System.Drawing.Point(1414, 595);
-            this.m_ListBoxPictureData.Name = "m_ListBoxPictureData";
-            this.m_ListBoxPictureData.Size = new System.Drawing.Size(534, 244);
-            this.m_ListBoxPictureData.TabIndex = 37;
+            this.listBoxPictureData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxPictureData.FormattingEnabled = true;
+            this.listBoxPictureData.ItemHeight = 16;
+            this.listBoxPictureData.Location = new System.Drawing.Point(363, 412);
+            this.listBoxPictureData.Margin = new System.Windows.Forms.Padding(2);
+            this.listBoxPictureData.Name = "listBoxPictureData";
+            this.listBoxPictureData.Size = new System.Drawing.Size(357, 148);
+            this.listBoxPictureData.TabIndex = 37;
             // 
-            // m_ComboBoxAlbumsNames
+            // comboBoxAlbumsNames
             // 
-            this.m_ComboBoxAlbumsNames.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.m_ComboBoxAlbumsNames.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.m_ComboBoxAlbumsNames.DisplayMember = "(none)";
-            this.m_ComboBoxAlbumsNames.Enabled = false;
-            this.m_ComboBoxAlbumsNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_ComboBoxAlbumsNames.FormattingEnabled = true;
-            this.m_ComboBoxAlbumsNames.Location = new System.Drawing.Point(390, 429);
-            this.m_ComboBoxAlbumsNames.Name = "m_ComboBoxAlbumsNames";
-            this.m_ComboBoxAlbumsNames.Size = new System.Drawing.Size(157, 24);
-            this.m_ComboBoxAlbumsNames.TabIndex = 36;
+            this.comboBoxAlbumsNames.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxAlbumsNames.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxAlbumsNames.DisplayMember = "(none)";
+            this.comboBoxAlbumsNames.Enabled = false;
+            this.comboBoxAlbumsNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxAlbumsNames.FormattingEnabled = true;
+            this.comboBoxAlbumsNames.Location = new System.Drawing.Point(232, 178);
+            this.comboBoxAlbumsNames.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxAlbumsNames.Name = "comboBoxAlbumsNames";
+            this.comboBoxAlbumsNames.Size = new System.Drawing.Size(106, 24);
+            this.comboBoxAlbumsNames.TabIndex = 36;
             // 
-            // label6
+            // taggedFriendLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label6.Location = new System.Drawing.Point(80, 478);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 17);
-            this.label6.TabIndex = 33;
-            this.label6.Text = "Tagged friend";
+            this.taggedFriendLabel.AutoSize = true;
+            this.taggedFriendLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.taggedFriendLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.taggedFriendLabel.Location = new System.Drawing.Point(29, 214);
+            this.taggedFriendLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.taggedFriendLabel.Name = "taggedFriendLabel";
+            this.taggedFriendLabel.Size = new System.Drawing.Size(97, 17);
+            this.taggedFriendLabel.TabIndex = 33;
+            this.taggedFriendLabel.Text = "Tagged friend";
             // 
-            // label5
+            // fromAlbumLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(80, 432);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 17);
-            this.label5.TabIndex = 32;
-            this.label5.Text = "From album";
+            this.fromAlbumLabel.AutoSize = true;
+            this.fromAlbumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.fromAlbumLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.fromAlbumLabel.Location = new System.Drawing.Point(28, 185);
+            this.fromAlbumLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.fromAlbumLabel.Name = "fromAlbumLabel";
+            this.fromAlbumLabel.Size = new System.Drawing.Size(82, 17);
+            this.fromAlbumLabel.TabIndex = 32;
+            this.fromAlbumLabel.Text = "From album";
             // 
-            // m_LabelTo
+            // toLabel
             // 
-            this.m_LabelTo.AutoSize = true;
-            this.m_LabelTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.m_LabelTo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_LabelTo.Location = new System.Drawing.Point(322, 349);
-            this.m_LabelTo.Name = "m_LabelTo";
-            this.m_LabelTo.Size = new System.Drawing.Size(25, 17);
-            this.m_LabelTo.TabIndex = 31;
-            this.m_LabelTo.Text = "To";
+            this.toLabel.AutoSize = true;
+            this.toLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.toLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.toLabel.Location = new System.Drawing.Point(188, 125);
+            this.toLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.toLabel.Name = "toLabel";
+            this.toLabel.Size = new System.Drawing.Size(25, 17);
+            this.toLabel.TabIndex = 31;
+            this.toLabel.Text = "To";
             // 
-            // m_LabelFrom
+            // labelFrom
             // 
-            this.m_LabelFrom.AutoSize = true;
-            this.m_LabelFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.m_LabelFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_LabelFrom.Location = new System.Drawing.Point(80, 346);
-            this.m_LabelFrom.Name = "m_LabelFrom";
-            this.m_LabelFrom.Size = new System.Drawing.Size(40, 17);
-            this.m_LabelFrom.TabIndex = 30;
-            this.m_LabelFrom.Text = "From";
+            this.labelFrom.AutoSize = true;
+            this.labelFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.labelFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelFrom.Location = new System.Drawing.Point(29, 128);
+            this.labelFrom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelFrom.Name = "labelFrom";
+            this.labelFrom.Size = new System.Drawing.Size(40, 17);
+            this.labelFrom.TabIndex = 30;
+            this.labelFrom.Text = "From";
             // 
-            // m_DateTimePickerToDate
+            // dateTimePickerToDate
             // 
-            this.m_DateTimePickerToDate.Enabled = false;
-            this.m_DateTimePickerToDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_DateTimePickerToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.m_DateTimePickerToDate.Location = new System.Drawing.Point(388, 346);
-            this.m_DateTimePickerToDate.Name = "m_DateTimePickerToDate";
-            this.m_DateTimePickerToDate.Size = new System.Drawing.Size(158, 23);
-            this.m_DateTimePickerToDate.TabIndex = 29;
+            this.dateTimePickerToDate.Enabled = false;
+            this.dateTimePickerToDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerToDate.Location = new System.Drawing.Point(232, 122);
+            this.dateTimePickerToDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimePickerToDate.Name = "dateTimePickerToDate";
+            this.dateTimePickerToDate.Size = new System.Drawing.Size(107, 23);
+            this.dateTimePickerToDate.TabIndex = 29;
             // 
             // m_DateTimePickerFromDate
             // 
             this.m_DateTimePickerFromDate.Enabled = false;
             this.m_DateTimePickerFromDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_DateTimePickerFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.m_DateTimePickerFromDate.Location = new System.Drawing.Point(142, 346);
+            this.m_DateTimePickerFromDate.Location = new System.Drawing.Point(71, 125);
+            this.m_DateTimePickerFromDate.Margin = new System.Windows.Forms.Padding(2);
             this.m_DateTimePickerFromDate.MaxDate = new System.DateTime(2039, 1, 1, 0, 0, 0, 0);
             this.m_DateTimePickerFromDate.MinDate = new System.DateTime(2003, 1, 1, 0, 0, 0, 0);
             this.m_DateTimePickerFromDate.Name = "m_DateTimePickerFromDate";
-            this.m_DateTimePickerFromDate.Size = new System.Drawing.Size(158, 23);
+            this.m_DateTimePickerFromDate.Size = new System.Drawing.Size(107, 23);
             this.m_DateTimePickerFromDate.TabIndex = 28;
             // 
-            // label1
+            // minLikesLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(80, 392);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 17);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Min amount of likes:";
+            this.minLikesLabel.AutoSize = true;
+            this.minLikesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.minLikesLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.minLikesLabel.Location = new System.Drawing.Point(28, 157);
+            this.minLikesLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.minLikesLabel.Name = "minLikesLabel";
+            this.minLikesLabel.Size = new System.Drawing.Size(133, 17);
+            this.minLikesLabel.TabIndex = 27;
+            this.minLikesLabel.Text = "Min amount of likes:";
             // 
-            // m_PictureBoxSelectedImage
+            // pictureBoxSelectedImage
             // 
-            this.m_PictureBoxSelectedImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_PictureBoxSelectedImage.Location = new System.Drawing.Point(1414, 175);
-            this.m_PictureBoxSelectedImage.Name = "m_PictureBoxSelectedImage";
-            this.m_PictureBoxSelectedImage.Size = new System.Drawing.Size(534, 338);
-            this.m_PictureBoxSelectedImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.m_PictureBoxSelectedImage.TabIndex = 25;
-            this.m_PictureBoxSelectedImage.TabStop = false;
+            this.pictureBoxSelectedImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureBoxSelectedImage.Location = new System.Drawing.Point(364, 122);
+            this.pictureBoxSelectedImage.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBoxSelectedImage.Name = "pictureBoxSelectedImage";
+            this.pictureBoxSelectedImage.Size = new System.Drawing.Size(356, 220);
+            this.pictureBoxSelectedImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxSelectedImage.TabIndex = 25;
+            this.pictureBoxSelectedImage.TabStop = false;
             // 
-            // m_ButtonSearch
+            // buttonSearch
             // 
-            this.m_ButtonSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(181)))), ((int)(((byte)(74)))));
-            this.m_ButtonSearch.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.m_ButtonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.m_ButtonSearch.Font = new System.Drawing.Font("Impact", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_ButtonSearch.ForeColor = System.Drawing.Color.White;
-            this.m_ButtonSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_ButtonSearch.Location = new System.Drawing.Point(100, 626);
-            this.m_ButtonSearch.Name = "m_ButtonSearch";
-            this.m_ButtonSearch.Size = new System.Drawing.Size(380, 123);
-            this.m_ButtonSearch.TabIndex = 35;
-            this.m_ButtonSearch.Text = "Search";
-            this.m_ButtonSearch.UseVisualStyleBackColor = false;
-            this.m_ButtonSearch.Click += new System.EventHandler(this.m_ButtonSearch_Click);
+            this.buttonSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(181)))), ((int)(((byte)(74)))));
+            this.buttonSearch.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonSearch.Font = new System.Drawing.Font("Impact", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.ForeColor = System.Drawing.Color.White;
+            this.buttonSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonSearch.Location = new System.Drawing.Point(11, 245);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(328, 49);
+            this.buttonSearch.TabIndex = 35;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.m_ButtonSearch_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(27, 222);
+            this.label7.Location = new System.Drawing.Point(11, 89);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 24);
             this.label7.TabIndex = 47;
             this.label7.Text = "Filters:";
             // 
-            // m_LabelLikes
+            // labelLikes
             // 
-            this.m_LabelLikes.AutoSize = true;
-            this.m_LabelLikes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_LabelLikes.Location = new System.Drawing.Point(1438, 517);
-            this.m_LabelLikes.Name = "m_LabelLikes";
-            this.m_LabelLikes.Size = new System.Drawing.Size(45, 17);
-            this.m_LabelLikes.TabIndex = 48;
-            this.m_LabelLikes.Text = "Likes:";
+            this.labelLikes.AutoSize = true;
+            this.labelLikes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLikes.Location = new System.Drawing.Point(380, 344);
+            this.labelLikes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelLikes.Name = "labelLikes";
+            this.labelLikes.Size = new System.Drawing.Size(45, 17);
+            this.labelLikes.TabIndex = 48;
+            this.labelLikes.Text = "Likes:";
             // 
-            // m_LabelComments
+            // labelComments
             // 
-            this.m_LabelComments.AutoSize = true;
-            this.m_LabelComments.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_LabelComments.Location = new System.Drawing.Point(1762, 517);
-            this.m_LabelComments.Name = "m_LabelComments";
-            this.m_LabelComments.Size = new System.Drawing.Size(78, 17);
-            this.m_LabelComments.TabIndex = 49;
-            this.m_LabelComments.Text = "Comments:";
+            this.labelComments.AutoSize = true;
+            this.labelComments.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelComments.Location = new System.Drawing.Point(596, 344);
+            this.labelComments.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelComments.Name = "labelComments";
+            this.labelComments.Size = new System.Drawing.Size(78, 17);
+            this.labelComments.TabIndex = 49;
+            this.labelComments.Text = "Comments:";
             // 
-            // m_CheckBoxTaggedFriends
+            // checkBoxTaggedFriends
             // 
-            this.m_CheckBoxTaggedFriends.AutoSize = true;
-            this.m_CheckBoxTaggedFriends.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_CheckBoxTaggedFriends.Location = new System.Drawing.Point(48, 483);
-            this.m_CheckBoxTaggedFriends.Name = "m_CheckBoxTaggedFriends";
-            this.m_CheckBoxTaggedFriends.Size = new System.Drawing.Size(15, 14);
-            this.m_CheckBoxTaggedFriends.TabIndex = 50;
-            this.m_CheckBoxTaggedFriends.UseVisualStyleBackColor = true;
-            this.m_CheckBoxTaggedFriends.CheckedChanged += new System.EventHandler(this.m_CheckBoxTaggedFriends_CheckedChanged);
+            this.checkBoxTaggedFriends.AutoSize = true;
+            this.checkBoxTaggedFriends.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.checkBoxTaggedFriends.Location = new System.Drawing.Point(10, 215);
+            this.checkBoxTaggedFriends.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxTaggedFriends.Name = "checkBoxTaggedFriends";
+            this.checkBoxTaggedFriends.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxTaggedFriends.TabIndex = 50;
+            this.checkBoxTaggedFriends.UseVisualStyleBackColor = true;
+            this.checkBoxTaggedFriends.CheckedChanged += new System.EventHandler(this.m_CheckBoxTaggedFriends_CheckedChanged);
             // 
-            // m_ComboBoxTaggedFriend
+            // comboBoxTaggedFriend
             // 
-            this.m_ComboBoxTaggedFriend.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.m_ComboBoxTaggedFriend.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.m_ComboBoxTaggedFriend.DisplayMember = "(none)";
-            this.m_ComboBoxTaggedFriend.Enabled = false;
-            this.m_ComboBoxTaggedFriend.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_ComboBoxTaggedFriend.FormattingEnabled = true;
-            this.m_ComboBoxTaggedFriend.Location = new System.Drawing.Point(390, 478);
-            this.m_ComboBoxTaggedFriend.Name = "m_ComboBoxTaggedFriend";
-            this.m_ComboBoxTaggedFriend.Size = new System.Drawing.Size(157, 24);
-            this.m_ComboBoxTaggedFriend.TabIndex = 51;
+            this.comboBoxTaggedFriend.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxTaggedFriend.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxTaggedFriend.DisplayMember = "(none)";
+            this.comboBoxTaggedFriend.Enabled = false;
+            this.comboBoxTaggedFriend.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxTaggedFriend.FormattingEnabled = true;
+            this.comboBoxTaggedFriend.Location = new System.Drawing.Point(233, 207);
+            this.comboBoxTaggedFriend.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxTaggedFriend.Name = "comboBoxTaggedFriend";
+            this.comboBoxTaggedFriend.Size = new System.Drawing.Size(106, 24);
+            this.comboBoxTaggedFriend.TabIndex = 51;
             // 
-            // m_NumericUpDownLikes
+            // numericUpDownLikes
             // 
-            this.m_NumericUpDownLikes.Enabled = false;
-            this.m_NumericUpDownLikes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_NumericUpDownLikes.Location = new System.Drawing.Point(390, 389);
-            this.m_NumericUpDownLikes.Maximum = new decimal(new int[] {
+            this.numericUpDownLikes.Enabled = false;
+            this.numericUpDownLikes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownLikes.Location = new System.Drawing.Point(232, 151);
+            this.numericUpDownLikes.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownLikes.Maximum = new decimal(new int[] {
             400,
             0,
             0,
             0});
-            this.m_NumericUpDownLikes.Name = "m_NumericUpDownLikes";
-            this.m_NumericUpDownLikes.Size = new System.Drawing.Size(158, 23);
-            this.m_NumericUpDownLikes.TabIndex = 52;
+            this.numericUpDownLikes.Name = "numericUpDownLikes";
+            this.numericUpDownLikes.Size = new System.Drawing.Size(105, 23);
+            this.numericUpDownLikes.TabIndex = 52;
             // 
-            // m_FlowLayoutPanelImages
+            // flowLayoutPanelImages
             // 
-            this.m_FlowLayoutPanelImages.AutoScroll = true;
-            this.m_FlowLayoutPanelImages.BackColor = System.Drawing.Color.White;
-            this.m_FlowLayoutPanelImages.Location = new System.Drawing.Point(588, 182);
-            this.m_FlowLayoutPanelImages.Name = "m_FlowLayoutPanelImages";
-            this.m_FlowLayoutPanelImages.Size = new System.Drawing.Size(783, 668);
-            this.m_FlowLayoutPanelImages.TabIndex = 53;
+            this.flowLayoutPanelImages.AutoScroll = true;
+            this.flowLayoutPanelImages.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanelImages.Location = new System.Drawing.Point(11, 336);
+            this.flowLayoutPanelImages.Margin = new System.Windows.Forms.Padding(2);
+            this.flowLayoutPanelImages.Name = "flowLayoutPanelImages";
+            this.flowLayoutPanelImages.Size = new System.Drawing.Size(328, 224);
+            this.flowLayoutPanelImages.TabIndex = 53;
             // 
             // imageList1
             // 
@@ -360,39 +403,43 @@
             // 
             // AdvancedImageForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1965, 878);
-            this.Controls.Add(this.m_FlowLayoutPanelImages);
-            this.Controls.Add(this.m_NumericUpDownLikes);
-            this.Controls.Add(this.m_ComboBoxTaggedFriend);
-            this.Controls.Add(this.m_CheckBoxTaggedFriends);
-            this.Controls.Add(this.m_LabelComments);
-            this.Controls.Add(this.m_LabelLikes);
+            this.ClientSize = new System.Drawing.Size(742, 571);
+            this.Controls.Add(this.flowLayoutPanelImages);
+            this.Controls.Add(this.numericUpDownLikes);
+            this.Controls.Add(this.comboBoxTaggedFriend);
+            this.Controls.Add(this.checkBoxTaggedFriends);
+            this.Controls.Add(this.labelComments);
+            this.Controls.Add(this.labelLikes);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.m_ComboBoxShow);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.m_ComboBoxSortBy);
-            this.Controls.Add(this.m_CheckBoxAlbum);
-            this.Controls.Add(this.m_CheckBoxLikes);
-            this.Controls.Add(this.m_CheckBoxDate);
-            this.Controls.Add(this.m_ListBoxPictureData);
-            this.Controls.Add(this.m_ComboBoxAlbumsNames);
-            this.Controls.Add(this.m_ButtonSearch);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.m_LabelTo);
-            this.Controls.Add(this.m_LabelFrom);
-            this.Controls.Add(this.m_DateTimePickerToDate);
+            this.Controls.Add(this.comboBoxShow);
+            this.Controls.Add(this.backgroundPanel);
+            this.Controls.Add(this.comboBoxSortBy);
+            this.Controls.Add(this.checkBoxAlbum);
+            this.Controls.Add(this.checkBoxLikes);
+            this.Controls.Add(this.checkBoxDate);
+            this.Controls.Add(this.listBoxPictureData);
+            this.Controls.Add(this.comboBoxAlbumsNames);
+            this.Controls.Add(this.buttonSearch);
+            this.Controls.Add(this.taggedFriendLabel);
+            this.Controls.Add(this.fromAlbumLabel);
+            this.Controls.Add(this.toLabel);
+            this.Controls.Add(this.labelFrom);
+            this.Controls.Add(this.dateTimePickerToDate);
             this.Controls.Add(this.m_DateTimePickerFromDate);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.m_PictureBoxSelectedImage);
+            this.Controls.Add(this.minLikesLabel);
+            this.Controls.Add(this.pictureBoxSelectedImage);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdvancedImageForm";
-            this.k_NoTaggedPickedError = "AdvancedImageForm";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxSelectedImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.m_NumericUpDownLikes)).EndInit();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Advanced Image Search";
+            this.backgroundPanel.ResumeLayout(false);
+            this.backgroundPanel.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLikes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,31 +447,33 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox m_ComboBoxShow;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label m_LabelAdvancedImageSearch;
-        private System.Windows.Forms.ComboBox m_ComboBoxSortBy;
-        private System.Windows.Forms.CheckBox m_CheckBoxAlbum;
-        private System.Windows.Forms.CheckBox m_CheckBoxLikes;
-        private System.Windows.Forms.CheckBox m_CheckBoxDate;
-        private System.Windows.Forms.ListBox m_ListBoxPictureData;
-        private System.Windows.Forms.ComboBox m_ComboBoxAlbumsNames;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label m_LabelTo;
-        private System.Windows.Forms.Label m_LabelFrom;
-        private System.Windows.Forms.DateTimePicker m_DateTimePickerToDate;
+        private System.Windows.Forms.ComboBox comboBoxShow;
+        private System.Windows.Forms.Panel backgroundPanel;
+        private System.Windows.Forms.Label labelAdvancedImageSearch;
+        private System.Windows.Forms.ComboBox comboBoxSortBy;
+        private System.Windows.Forms.CheckBox checkBoxAlbum;
+        private System.Windows.Forms.CheckBox checkBoxLikes;
+        private System.Windows.Forms.CheckBox checkBoxDate;
+        private System.Windows.Forms.ListBox listBoxPictureData;
+        private System.Windows.Forms.ComboBox comboBoxAlbumsNames;
+        private System.Windows.Forms.Label taggedFriendLabel;
+        private System.Windows.Forms.Label fromAlbumLabel;
+        private System.Windows.Forms.Label toLabel;
+        private System.Windows.Forms.Label labelFrom;
+        private System.Windows.Forms.DateTimePicker dateTimePickerToDate;
         private System.Windows.Forms.DateTimePicker m_DateTimePickerFromDate;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox m_PictureBoxSelectedImage;
-        private System.Windows.Forms.Button m_ButtonSearch;
+        private System.Windows.Forms.Label minLikesLabel;
+        private System.Windows.Forms.PictureBox pictureBoxSelectedImage;
+        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label m_LabelLikes;
-        private System.Windows.Forms.Label m_LabelComments;
-        private System.Windows.Forms.CheckBox m_CheckBoxTaggedFriends;
-        private System.Windows.Forms.ComboBox m_ComboBoxTaggedFriend;
-        private System.Windows.Forms.NumericUpDown m_NumericUpDownLikes;
-        private System.Windows.Forms.FlowLayoutPanel m_FlowLayoutPanelImages;
+        private System.Windows.Forms.Label labelLikes;
+        private System.Windows.Forms.Label labelComments;
+        private System.Windows.Forms.CheckBox checkBoxTaggedFriends;
+        private System.Windows.Forms.ComboBox comboBoxTaggedFriend;
+        private System.Windows.Forms.NumericUpDown numericUpDownLikes;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelImages;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.PictureBox logoPictureBox;
+        private System.Windows.Forms.Panel panel2;
     }
 }

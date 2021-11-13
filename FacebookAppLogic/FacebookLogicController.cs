@@ -7,43 +7,7 @@ namespace FacebookAppLogic
 {
     public class FacebookLogicController
     {
-        public User LoggedInUser
-        {
-            get; 
-            private set;
-        }
-
-        public void Login()
-        {
-            bool isAccessTokenEmpty = true;
-            LoginResult loginResult = FacebookService.Login(
-                "973153713605868",
-                
-                "user_likes",
-                "user_photos",
-                "user_posts",
-                "user_friends",
-                "user_birthday",
-                "user_gender",
-                "user_videos",
-                "user_link",
-                "user_events",
-                //"user_tagged_places",
-                "user_hometown",
-                "user_location",
-                "groups_access_member_info",
-                "email");
-
-            isAccessTokenEmpty = string.IsNullOrEmpty(loginResult.AccessToken);
-            if (!isAccessTokenEmpty)
-            {
-                LoggedInUser = loginResult.LoggedInUser;
-            }
-            else
-            {
-                throw new Exception("Login failed - please try again");
-            }
-        }
+        public User LoggedInUser { get; set; }
 
         public void Logout()
         {
@@ -69,7 +33,7 @@ namespace FacebookAppLogic
             {
                 return LoggedInUser.FirstName + ' ' + LoggedInUser.LastName;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve username");
             }
@@ -81,7 +45,7 @@ namespace FacebookAppLogic
             {
                 return LoggedInUser.Friends;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve friends");
             }
@@ -92,13 +56,13 @@ namespace FacebookAppLogic
             List<string> postsList = new List<string>();
             try
             {
-                foreach (Post post in LoggedInUser.Posts)
+                foreach(Post post in LoggedInUser.Posts)
                 {
-                    if (post.Message != null)
+                    if(post.Message != null)
                     {
                         postsList.Add(post.Message);
                     }
-                    else if (post.Caption != null)
+                    else if(post.Caption != null)
                     {
                         postsList.Add(post.Caption);
                     }
@@ -122,7 +86,7 @@ namespace FacebookAppLogic
             {
                 LoggedInUser.PostStatus(i_StatusToPost);
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to post status");
             }
@@ -134,12 +98,12 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Comment commentOnStatus in LoggedInUser.Posts[i_IndexForRelatedStatus].Comments)
+                foreach(Comment commentOnStatus in LoggedInUser.Posts[i_IndexForRelatedStatus].Comments)
                 {
                     commentsRelated.Add(commentOnStatus.Message);
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to retrieve comments");
             }
@@ -153,12 +117,12 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Event fbEvent in LoggedInUser.Events)
+                foreach(Event fbEvent in LoggedInUser.Events)
                 {
                     eventsNames.Add(fbEvent.Name);
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to load events");
             }
@@ -172,12 +136,12 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Page likedPage in LoggedInUser.LikedPages)
+                foreach(Page likedPage in LoggedInUser.LikedPages)
                 {
                     pagesNames.Add(likedPage.Name);
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to load pages");
             }
@@ -191,19 +155,17 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Group group in LoggedInUser.Groups)
+                foreach(Group group in LoggedInUser.Groups)
                 {
                     groupsNames.Add(group.Name);
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to load groups");
             }
 
             return groupsNames;
         }
-
-
     }
 }

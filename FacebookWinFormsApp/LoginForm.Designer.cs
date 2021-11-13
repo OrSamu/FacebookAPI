@@ -29,39 +29,94 @@
         private void InitializeComponent()
         {
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.buttonLogout = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
+            this.headlineBluePanel = new System.Windows.Forms.Panel();
+            this.loginLabel = new System.Windows.Forms.Label();
+            this.logoBackgroundPanel = new System.Windows.Forms.Panel();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
+            this.headlineBluePanel.SuspendLayout();
+            this.logoBackgroundPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(12, 12);
+            this.buttonLogin.Location = new System.Drawing.Point(47, 102);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(179, 23);
+            this.buttonLogin.Size = new System.Drawing.Size(100, 30);
             this.buttonLogin.TabIndex = 36;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
-            // buttonLogout
+            // buttonExit
             // 
-            this.buttonLogout.Location = new System.Drawing.Point(12, 41);
-            this.buttonLogout.Name = "buttonLogout";
-            this.buttonLogout.Size = new System.Drawing.Size(179, 23);
-            this.buttonLogout.TabIndex = 52;
-            this.buttonLogout.Text = "Exit";
-            this.buttonLogout.UseVisualStyleBackColor = true;
-            this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
+            this.buttonExit.Location = new System.Drawing.Point(175, 102);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(100, 30);
+            this.buttonExit.TabIndex = 52;
+            this.buttonExit.Text = "Exit";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // headlineBluePanel
+            // 
+            this.headlineBluePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(89)))), ((int)(((byte)(152)))));
+            this.headlineBluePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.headlineBluePanel.Controls.Add(this.loginLabel);
+            this.headlineBluePanel.Controls.Add(this.logoBackgroundPanel);
+            this.headlineBluePanel.Location = new System.Drawing.Point(0, 0);
+            this.headlineBluePanel.Name = "headlineBluePanel";
+            this.headlineBluePanel.Size = new System.Drawing.Size(309, 55);
+            this.headlineBluePanel.TabIndex = 53;
+            // 
+            // loginLabel
+            // 
+            this.loginLabel.AutoSize = true;
+            this.loginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.loginLabel.ForeColor = System.Drawing.Color.White;
+            this.loginLabel.Location = new System.Drawing.Point(126, 20);
+            this.loginLabel.Name = "loginLabel";
+            this.loginLabel.Size = new System.Drawing.Size(73, 29);
+            this.loginLabel.TabIndex = 15;
+            this.loginLabel.Text = "Login";
+            // 
+            // logoBackgroundPanel
+            // 
+            this.logoBackgroundPanel.BackColor = System.Drawing.Color.White;
+            this.logoBackgroundPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logoBackgroundPanel.Controls.Add(this.logoPictureBox);
+            this.logoBackgroundPanel.Location = new System.Drawing.Point(3, 5);
+            this.logoBackgroundPanel.Name = "logoBackgroundPanel";
+            this.logoBackgroundPanel.Size = new System.Drawing.Size(45, 45);
+            this.logoBackgroundPanel.TabIndex = 16;
+            // 
+            // logoPictureBox
+            // 
+            this.logoPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.logoPictureBox.Image = global::BasicFacebookFeatures.Properties.Resources.FBSmallLogo;
+            this.logoPictureBox.Location = new System.Drawing.Point(-5, -6);
+            this.logoPictureBox.Name = "logoPictureBox";
+            this.logoPictureBox.Size = new System.Drawing.Size(50, 50);
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logoPictureBox.TabIndex = 14;
+            this.logoPictureBox.TabStop = false;
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(201, 73);
-            this.Controls.Add(this.buttonLogout);
+            this.ClientSize = new System.Drawing.Size(308, 182);
+            this.Controls.Add(this.headlineBluePanel);
+            this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonLogin);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Login";
+            this.headlineBluePanel.ResumeLayout(false);
+            this.headlineBluePanel.PerformLayout();
+            this.logoBackgroundPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -69,7 +124,11 @@
 		#endregion
 
 		private System.Windows.Forms.Button buttonLogin;
-		private System.Windows.Forms.Button buttonLogout;
-	}
+		private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.Panel headlineBluePanel;
+        private System.Windows.Forms.Label loginLabel;
+        private System.Windows.Forms.Panel logoBackgroundPanel;
+        private System.Windows.Forms.PictureBox logoPictureBox;
+    }
 }
 
