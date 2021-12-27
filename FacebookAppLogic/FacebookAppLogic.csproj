@@ -43,17 +43,19 @@
     <Compile Include="FacebooksFriends.cs" />
     <Compile Include="Filters.cs" />
     <Compile Include="IPhotoData.cs" />
+    <Compile Include="IPostData.cs" />
     <Compile Include="PhotoComments.cs" />
     <Compile Include="PhotoLikes.cs" />
     <Compile Include="PhotoTags.cs" />
+    <Compile Include="PostAdapter.cs" />
     <Compile Include="UserDataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Facebook">
-      <HintPath>..\..\FBApi\Facebook.dll</HintPath>
+      <HintPath>..\FBApi\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="FbGraphApiWrapper">
-      <HintPath>..\..\FBApi\FbGraphApiWrapper.dll</HintPath>
+      <HintPath>..\FBApi\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
