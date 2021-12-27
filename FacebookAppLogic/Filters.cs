@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FacebookAppLogic
 {
@@ -13,6 +9,7 @@ namespace FacebookAppLogic
         private int m_MinAmoutOfLikes;
         private int? m_SelectedAlbumIndex;
         private string m_TaggedFriend;
+
         public Filters()
         {
             ResetFilter();
@@ -26,6 +23,7 @@ namespace FacebookAppLogic
             this.SelectedAlbumIndex = null;
             this.TaggedFriend = null;
         }
+
         public DateTime? MinCreationDate
         {
             get { return m_MinCreationDate; }
