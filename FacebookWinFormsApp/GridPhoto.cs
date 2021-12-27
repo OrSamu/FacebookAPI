@@ -19,19 +19,14 @@ namespace BasicFacebookFeatures
 {
     public class GridPhoto: PictureBox
     {
-        private Photo m_Photo;
+        public Photo Photo { get; set; }
         public GridPhoto(Photo i_Photo)
         {
-            m_Photo = i_Photo;
+            Photo = i_Photo;
             this.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.WaitOnLoad = false;
+            //this.Invoke(new Action(() => this.LoadAsync(i_Photo.PictureAlbumURL)));
             this.LoadAsync(i_Photo.PictureAlbumURL);
         }
-
-        public Photo Photo
-        {
-            get { return m_Photo; }
-            set { m_Photo = value; }
-        }
-
     }
 }
