@@ -1,28 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using CefSharp.DevTools.Database;
+using System.Threading;
 using FacebookAppLogic;
 
 namespace BasicFacebookFeatures
 {
     public partial class MainForm : Form
     {
-        
+        private const string k_EmptyDataRetrieved = "No data to show";
+        private const string k_DefaultStatusText = "What's on your mind?";
+        private const string k_ErrorForTryingToPostEmptyStatus = "Error - can't post empty status";
+
         private readonly LoginForm r_LoginForm;
         private readonly FacebookLogicController r_FacebookLogicController;
         
         public MainForm(LoginForm i_LoginForm, FacebookLogicController i_FacebookLogicController)
         {
             InitializeComponent();
+            this.FormClosing += MainForm_FormClosing;
             r_LoginForm = i_LoginForm;
             r_FacebookLogicController = i_FacebookLogicController;
             r_LoginForm.Visible = false;
+
+            //runs on different thread
+            //retrieveUserProfileData();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserDataManager.Instance.Logout();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
             retrieveUserProfileData();
         }
 
@@ -30,11 +43,15 @@ namespace BasicFacebookFeatures
         {
             profilePictureBox.ImageLocation = r_FacebookLogicController.RetrieveProfilePicture();
             usernameLabel.Text = r_FacebookLogicController.RetrieveUsername();
+            new Thread(showUserStatuses).Start();
+            new Thread(showUserGroups).Start();
+            new Thread(showUserEvents).Start();
+            new Thread(showUserPages).Start();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            r_FacebookLogicController.Logout();
+            //r_FacebookLogicController.Logout();
             r_LoginForm.Visible = true;
             Close();
         }
@@ -47,8 +64,172 @@ namespace BasicFacebookFeatures
 
         private void AdvancedImageSearch_Click(object sender, EventArgs e)
         {
-            AdvancedImageForm form = new AdvancedImageForm(r_FacebookLogicController.LoggedInUser);
+            AdvancedImageForm form = new AdvancedImageForm();
             form.ShowDialog();
+        }
+
+        private void statusTextBox_Click(object sender, EventArgs e)
+        {
+            bool isDefaultStatus = string.Equals(statusTextBox.Text, k_DefaultStatusText);
+            if (isDefaultStatus)
+            {
+                statusTextBox.Clear();
+            }
+
+            postButton.Enabled = true;
+        }
+
+        private void postButton_Click(object sender, EventArgs e)
+        {
+            bool isStatusEmpty = string.IsNullOrEmpty(statusTextBox.Text);
+
+            try
+            {
+                if(isStatusEmpty)
+                {
+                    MessageBox.Show(k_ErrorForTryingToPostEmptyStatus);
+                }
+
+                r_FacebookLogicController.PostStatus(statusTextBox.Text);
+                listBoxPosts.Items.Add(statusTextBox.Text);
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            finally
+            {
+                postButton.Enabled = false;
+                statusTextBox.Text = k_DefaultStatusText;
+            }
+        }
+
+        private void showUserStatuses()
+        {
+            try
+            {
+                List<string> userPostedStatuses = r_FacebookLogicController.RetrievePostedStatuses();
+                
+                if (userPostedStatuses.Count > 0)
+                {
+                    foreach (string status in userPostedStatuses)
+                    {
+                        listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add(status)));
+                        //listboxposts.items.add(status);
+                    }
+                }
+                else
+                {
+                    listBoxPosts.Items.Add(k_EmptyDataRetrieved);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //listBoxComments.Items.Clear();
+            try
+            {
+                List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
+
+                if (commentsForStatus.Count > 0)
+                {
+                    foreach (string comment in commentsForStatus)
+                    {
+                        listBoxComments.Items.Add(comment);
+                    }
+                }
+                else
+                {
+                    listBoxComments.Items.Add(k_EmptyDataRetrieved);
+                }
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void showUserEvents()
+        {
+            //listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Clear()));
+            try
+            {
+                List<string> userEvents = r_FacebookLogicController.RetrieveEvents();
+
+                if (userEvents.Count > 0)
+                {
+                    foreach (string facebookEventName in userEvents)
+                    {
+                        listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(facebookEventName)));
+                        //listBoxEvents.Items.Add(facebookEventName);
+                    }
+                }
+                else
+                {
+                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(k_EmptyDataRetrieved)));
+                    //listBoxEvents.Items.Add(k_EmptyDataRetrieved);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void showUserPages()
+        {
+            //listBoxPages.Items.Clear();
+            try
+            {
+                List<string> userLikedPages = r_FacebookLogicController.RetrievePages();
+
+                if (userLikedPages.Count > 0)
+                {
+                    foreach (string likedPageName in userLikedPages)
+                    {
+                        listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add(likedPageName)));
+                    }
+                }
+                else
+                {
+                    listBoxPages.Items.Add(k_EmptyDataRetrieved);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void showUserGroups()
+        {
+            //listBoxGroups.Items.Clear();
+            try
+            {
+                List<string> userLikedGroups = r_FacebookLogicController.RetrieveGroups();
+
+                if(userLikedGroups.Count > 0)
+                {
+                    foreach (string likedGroupName in userLikedGroups)
+                    {
+                        listBoxGroups.Invoke(new Action(() => listBoxGroups.Items.Add(likedGroupName)));
+                        //listBoxGroups.Items.Add(likedGroupName);
+                    }
+                }
+                else
+                {
+                    listBoxGroups.Items.Add(k_EmptyDataRetrieved);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }
