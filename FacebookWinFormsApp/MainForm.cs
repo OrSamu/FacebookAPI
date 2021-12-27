@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CefSharp.DevTools.Database;
+using System.Threading;
 using FacebookAppLogic;
 
 namespace BasicFacebookFeatures
@@ -18,9 +19,23 @@ namespace BasicFacebookFeatures
         public MainForm(LoginForm i_LoginForm, FacebookLogicController i_FacebookLogicController)
         {
             InitializeComponent();
+            this.FormClosing += MainForm_FormClosing;
             r_LoginForm = i_LoginForm;
             r_FacebookLogicController = i_FacebookLogicController;
             r_LoginForm.Visible = false;
+
+            //runs on different thread
+            //retrieveUserProfileData();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UserDataManager.Instance.Logout();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
             retrieveUserProfileData();
         }
 
@@ -28,15 +43,15 @@ namespace BasicFacebookFeatures
         {
             profilePictureBox.ImageLocation = r_FacebookLogicController.RetrieveProfilePicture();
             usernameLabel.Text = r_FacebookLogicController.RetrieveUsername();
-            showUserStatuses();
-            showUserEvents();
-            showUserGroups();
-            showUserPages();
+            new Thread(showUserStatuses).Start();
+            new Thread(showUserGroups).Start();
+            new Thread(showUserEvents).Start();
+            new Thread(showUserPages).Start();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            r_FacebookLogicController.Logout();
+            //r_FacebookLogicController.Logout();
             r_LoginForm.Visible = true;
             Close();
         }
@@ -49,7 +64,7 @@ namespace BasicFacebookFeatures
 
         private void AdvancedImageSearch_Click(object sender, EventArgs e)
         {
-            AdvancedImageForm form = new AdvancedImageForm(r_FacebookLogicController.LoggedInUser);
+            AdvancedImageForm form = new AdvancedImageForm();
             form.ShowDialog();
         }
 
@@ -99,7 +114,8 @@ namespace BasicFacebookFeatures
                 {
                     foreach (string status in userPostedStatuses)
                     {
-                        listBoxPosts.Items.Add(status);
+                        listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add(status)));
+                        //listboxposts.items.add(status);
                     }
                 }
                 else
@@ -115,7 +131,7 @@ namespace BasicFacebookFeatures
 
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listBoxComments.Items.Clear();
+            //listBoxComments.Items.Clear();
             try
             {
                 List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
@@ -140,7 +156,7 @@ namespace BasicFacebookFeatures
 
         private void showUserEvents()
         {
-            listBoxEvents.Items.Clear();
+            //listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Clear()));
             try
             {
                 List<string> userEvents = r_FacebookLogicController.RetrieveEvents();
@@ -149,12 +165,14 @@ namespace BasicFacebookFeatures
                 {
                     foreach (string facebookEventName in userEvents)
                     {
-                        listBoxEvents.Items.Add(facebookEventName);
+                        listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(facebookEventName)));
+                        //listBoxEvents.Items.Add(facebookEventName);
                     }
                 }
                 else
                 {
-                    listBoxEvents.Items.Add(k_EmptyDataRetrieved);
+                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(k_EmptyDataRetrieved)));
+                    //listBoxEvents.Items.Add(k_EmptyDataRetrieved);
                 }
             }
             catch (Exception exception)
@@ -165,7 +183,7 @@ namespace BasicFacebookFeatures
 
         private void showUserPages()
         {
-            listBoxPages.Items.Clear();
+            //listBoxPages.Items.Clear();
             try
             {
                 List<string> userLikedPages = r_FacebookLogicController.RetrievePages();
@@ -174,7 +192,7 @@ namespace BasicFacebookFeatures
                 {
                     foreach (string likedPageName in userLikedPages)
                     {
-                        listBoxPages.Items.Add(likedPageName);
+                        listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add(likedPageName)));
                     }
                 }
                 else
@@ -190,7 +208,7 @@ namespace BasicFacebookFeatures
 
         private void showUserGroups()
         {
-            listBoxGroups.Items.Clear();
+            //listBoxGroups.Items.Clear();
             try
             {
                 List<string> userLikedGroups = r_FacebookLogicController.RetrieveGroups();
@@ -199,7 +217,8 @@ namespace BasicFacebookFeatures
                 {
                     foreach (string likedGroupName in userLikedGroups)
                     {
-                        listBoxGroups.Items.Add(likedGroupName);
+                        listBoxGroups.Invoke(new Action(() => listBoxGroups.Items.Add(likedGroupName)));
+                        //listBoxGroups.Items.Add(likedGroupName);
                     }
                 }
                 else

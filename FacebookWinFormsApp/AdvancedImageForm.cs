@@ -3,41 +3,51 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookAppLogic;
-
+using System.Threading;
 namespace BasicFacebookFeatures
 {
     public partial class AdvancedImageForm : Form
     {
-        private readonly FacebookImages r_FacebookImages;
+        private readonly FacebookFilteredImages r_FacebookImages;
         private const string k_NoAlbumPickedError = "Please choose an album";
         private const string k_SortByLikes = "Likes";
         private const string k_SortByCreationDate = "Creation Date";
         private const string k_NoTaggedPickedError = "Please choose a tagged friend";
         private const string k_NoPhotosFoundError = "No photos to retrieve :(";
+        private const string k_RedHexCode = "#cc0202";
+        private const string k_GreenHexCode = "#39B54A";
+        
 
-        public AdvancedImageForm(User i_User)
+        public AdvancedImageForm()
         {
-            r_FacebookImages = new FacebookImages(i_User);
+            r_FacebookImages = new FacebookFilteredImages();
             InitializeComponent();
-            createAlbumListBox(i_User);
-            createFriendListBox(i_User);
+            createAlbumListBox();
+            createFriendListBox();
+            createImageDataListBox();
             this.PerformLayout();
         }
 
-        private void createAlbumListBox(User i_User)
+        private void createAlbumListBox()
         {
-            foreach(Album album in i_User.Albums)
+            foreach (Album album in UserDataManager.Instance.User.Albums)
             {
                 comboBoxAlbumsNames.Items.Add(album.Name);
             }
         }
 
-        private void createFriendListBox(User i_User)
+        private void createFriendListBox()
         {
-            foreach(User friendUser in i_User.Friends)
+            foreach (User friendUser in UserDataManager.Instance.User.Friends)
             {
                 comboBoxTaggedFriend.Items.Add(friendUser.Name);
             }
+        }
+        private void createImageDataListBox()
+        {
+            comboBoxShowData.Items.Add(new PhotoLikes());
+            comboBoxShowData.Items.Add(new PhotoComments());
+            comboBoxShowData.Items.Add(new PhotoTags());
         }
 
         private void m_CheckBoxDate_CheckedChanged(object sender, EventArgs e)
@@ -64,28 +74,43 @@ namespace BasicFacebookFeatures
         private void m_ButtonSearch_Click(object sender, EventArgs e)
         {
             r_FacebookImages.Filters.ResetFilter();
-            if(fecthFilters(r_FacebookImages.Filters))
+            if (fecthFilters(r_FacebookImages.Filters))
             {
-                try
+                buttonSearch.Text = "Loading...";
+                buttonSearch.BackColor = System.Drawing.ColorTranslator.FromHtml(k_RedHexCode);
+                flowLayoutPanelImages.Controls.Clear();
+                listBoxPictureData.Items.Clear();
+                new Thread(showFilteredPhotos).Start();
+            }
+                
+        }
+        private void showFilteredPhotos()
+        {
+            try
+            {
+                r_FacebookImages.FetchFilteredPhotos();
+            //flowLayoutPanelImages.Invoke(new Action(() => flowLayoutPanelImages.Controls.Clear()));
+            //listBoxPictureData.Invoke(new Action(() => listBoxPictureData.Items.Clear()));
+                if (r_FacebookImages.FilteredPhotos.Count == 0)
                 {
-                    r_FacebookImages.FetchFilteredPhotos();
-                    flowLayoutPanelImages.Controls.Clear();
-                    listBoxPictureData.Items.Clear();
+                    MessageBox.Show(k_NoPhotosFoundError);
+                }
+                else
+                {
+                    addPhotoToListBoxImagePanel();
+                    comboBoxSortBy.Invoke(new Action(() => comboBoxSortBy.Enabled = true));
+                }
 
-                    if(r_FacebookImages.Photos.Count == 0)
-                    {
-                        MessageBox.Show(k_NoPhotosFoundError);
-                    }
-                    else
-                    {
-                        addPhotoToListBoxImagePanel();
-                        comboBoxSortBy.Enabled = true;
-                    }
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                buttonSearch.Invoke(new Action(() => {
+                buttonSearch.Text = "Search";
+                buttonSearch.BackColor = System.Drawing.ColorTranslator.FromHtml(k_GreenHexCode);
+                }));
+
+                //comboBoxSortBy.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -136,20 +161,22 @@ namespace BasicFacebookFeatures
         {
             if(flowLayoutPanelImages.Controls.Count != 0)
             {
-                flowLayoutPanelImages.Controls.Clear();
+                flowLayoutPanelImages.Invoke(new Action(() => flowLayoutPanelImages.Controls.Clear()));
             }
 
-            foreach(Photo photo in r_FacebookImages.Photos)
+            foreach(Photo photo in r_FacebookImages.FilteredPhotos)
             {
-                GridPhoto picture = new GridPhoto(photo);
-                picture.Click += Picture_Click;
-                flowLayoutPanelImages.Controls.Add(picture);
+                flowLayoutPanelImages.Invoke(new Action(() => {
+                    GridPhoto picture = new GridPhoto(photo);
+                    picture.Click += Picture_Click;
+                    flowLayoutPanelImages.Controls.Add(picture);
+                    }));
             }
         }
 
         private void Picture_Click(object sender, EventArgs e)
         {
-            comboBoxShow.Enabled = true;
+            comboBoxShowData.Enabled = true;
 
             r_FacebookImages.SelectedPhoto = (sender as GridPhoto).Photo;
 
@@ -185,21 +212,50 @@ namespace BasicFacebookFeatures
 
         private void updateListBoxData()
         {
-            listBoxPictureData.Items.Clear();
-            List<string> imageData;
-            imageData = r_FacebookImages.SelectedImageData(comboBoxShow.SelectedIndex);
-            if(imageData.Count != 0)
+            try
             {
-                foreach(string data in imageData)
+                if(comboBoxShowData.SelectedIndex>=0)
                 {
-                    listBoxPictureData.Items.Add(data);
+                    IPhotoData photoData = (comboBoxShowData.SelectedItem as IPhotoData);
+                    listBoxPictureData.Items.Clear();
+                    List<string> imageData = photoData.GetData(r_FacebookImages.SelectedPhoto);
+
+                    if (imageData.Count != 0)
+                    {
+                        foreach (string data in imageData)
+                        {
+                            listBoxPictureData.Items.Add(data);
+                            //listBoxPictureData.Invoke(new Action(() => listBoxPictureData.Items.Add(data)));
+
+                        }
+                    }
                 }
+
             }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+
+            //Old
+
+            //List<string> imageData;
+            //listBoxPictureData.Items.Clear();
+            //imageData = r_FacebookImages.SelectedImageData(comboBoxShowData.SelectedIndex);
+            //if(imageData.Count != 0)
+            //{
+            //    foreach(string data in imageData)
+            //    {
+            //        listBoxPictureData.Invoke(new Action(() => listBoxPictureData.Items.Add(data)));
+            //        //listBoxPictureData.Items.Add(data);
+            //    }
+            //}
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxShowData_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateListBoxData();
+            //new Thread(updateListBoxData).Start();
         }
     }
 }
