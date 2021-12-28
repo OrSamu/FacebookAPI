@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CefSharp.DevTools.Database;
 using System.Threading;
 using FacebookAppLogic;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
@@ -109,7 +110,7 @@ namespace BasicFacebookFeatures
             try
             {
                 List<string> userPostedStatuses = r_FacebookLogicController.RetrievePostedStatuses();
-                
+
                 if (userPostedStatuses.Count > 0)
                 {
                     foreach (string status in userPostedStatuses)

@@ -54,22 +54,13 @@ namespace FacebookAppLogic
         public List<string> RetrievePostedStatuses()
         {
             List<string> postsList = new List<string>();
+
             try
             {
                 foreach(Post post in LoggedInUser.Posts)
                 {
-                    if(post.Message != null)
-                    {
-                        postsList.Add(post.Message);
-                    }
-                    else if(post.Caption != null)
-                    {
-                        postsList.Add(post.Caption);
-                    }
-                    else
-                    {
-                        postsList.Add(string.Format("[{0}]", post.Type));
-                    }
+                    StatusAdapter newStatus = new StatusAdapter(post);
+                    postsList.Add(newStatus.GenerateStatusFormat());
                 }
             }
             catch(Exception exception)

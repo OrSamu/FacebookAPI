@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FacebookAppLogic
 {
-    public interface IPostData
+    public interface IStatusFormat
     {
-        string GeneratePostWithDataFormat();
+        string GenerateStatusFormat();
     }
 }

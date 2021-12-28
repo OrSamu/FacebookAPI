@@ -43,11 +43,11 @@
     <Compile Include="FacebooksFriends.cs" />
     <Compile Include="Filters.cs" />
     <Compile Include="IPhotoData.cs" />
-    <Compile Include="IPostData.cs" />
+    <Compile Include="IStatusFormat.cs" />
     <Compile Include="PhotoComments.cs" />
     <Compile Include="PhotoLikes.cs" />
     <Compile Include="PhotoTags.cs" />
-    <Compile Include="PostAdapter.cs" />
+    <Compile Include="StatusAdapter.cs" />
     <Compile Include="UserDataManager.cs" />
   </ItemGroup>
   <ItemGroup>
