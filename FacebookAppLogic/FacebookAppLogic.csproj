@@ -44,9 +44,11 @@
     <Compile Include="Filters.cs" />
     <Compile Include="IPhotoData.cs" />
     <Compile Include="IStatusFormat.cs" />
+    <Compile Include="MainPage.cs" />
     <Compile Include="PhotoComments.cs" />
     <Compile Include="PhotoLikes.cs" />
     <Compile Include="PhotoTags.cs" />
+    <Compile Include="QuizPage.cs" />
     <Compile Include="StatusAdapter.cs" />
     <Compile Include="UserDataManager.cs" />
   </ItemGroup>

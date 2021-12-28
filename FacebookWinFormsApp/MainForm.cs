@@ -15,15 +15,17 @@ namespace BasicFacebookFeatures
         private const string k_ErrorForTryingToPostEmptyStatus = "Error - can't post empty status";
 
         private readonly LoginForm r_LoginForm;
-        private readonly FacebookLogicController r_FacebookLogicController;
-        
+        //private readonly FacebookLogicController r_FacebookLogicController;
+        private readonly MainPage r_MainPage;
+
         public MainForm(LoginForm i_LoginForm, FacebookLogicController i_FacebookLogicController)
         {
             InitializeComponent();
             this.FormClosing += MainForm_FormClosing;
             r_LoginForm = i_LoginForm;
-            r_FacebookLogicController = i_FacebookLogicController;
+            //r_FacebookLogicController = i_FacebookLogicController;
             r_LoginForm.Visible = false;
+            r_MainPage = new MainPage();
 
             //runs on different thread
             //retrieveUserProfileData();
@@ -42,8 +44,8 @@ namespace BasicFacebookFeatures
 
         private void retrieveUserProfileData()
         {
-            profilePictureBox.ImageLocation = r_FacebookLogicController.RetrieveProfilePicture();
-            usernameLabel.Text = r_FacebookLogicController.RetrieveUsername();
+            profilePictureBox.ImageLocation = UserDataManager.Instance.RetrieveProfilePicture();
+            usernameLabel.Text = UserDataManager.Instance.RetrieveUsername();
             new Thread(showUserStatuses).Start();
             new Thread(showUserGroups).Start();
             new Thread(showUserEvents).Start();
@@ -59,7 +61,7 @@ namespace BasicFacebookFeatures
 
         private void friendsGameButton_Click(object sender, EventArgs e)
         {
-            FriendsQuizForm friendQuizForm = new FriendsQuizForm(r_FacebookLogicController);
+            FriendsQuizForm friendQuizForm = new FriendsQuizForm();
             friendQuizForm.ShowDialog();
         }
 
@@ -91,7 +93,7 @@ namespace BasicFacebookFeatures
                     MessageBox.Show(k_ErrorForTryingToPostEmptyStatus);
                 }
 
-                r_FacebookLogicController.PostStatus(statusTextBox.Text);
+                r_MainPage.PostStatus(statusTextBox.Text);
                 listBoxPosts.Items.Add(statusTextBox.Text);
             }
             catch(Exception exception)
@@ -109,7 +111,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                List<string> userPostedStatuses = r_FacebookLogicController.RetrievePostedStatuses();
+                List<string> userPostedStatuses = r_MainPage.RetrievePostedStatuses();
 
                 if (userPostedStatuses.Count > 0)
                 {
@@ -135,7 +137,7 @@ namespace BasicFacebookFeatures
             //listBoxComments.Items.Clear();
             try
             {
-                List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
+                List<string> commentsForStatus = r_MainPage.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
 
                 if (commentsForStatus.Count > 0)
                 {
@@ -160,7 +162,7 @@ namespace BasicFacebookFeatures
             //listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Clear()));
             try
             {
-                List<string> userEvents = r_FacebookLogicController.RetrieveEvents();
+                List<string> userEvents = r_MainPage.RetrieveEvents();
 
                 if (userEvents.Count > 0)
                 {
@@ -187,7 +189,7 @@ namespace BasicFacebookFeatures
             //listBoxPages.Items.Clear();
             try
             {
-                List<string> userLikedPages = r_FacebookLogicController.RetrievePages();
+                List<string> userLikedPages = r_MainPage.RetrievePages();
 
                 if (userLikedPages.Count > 0)
                 {
@@ -212,7 +214,7 @@ namespace BasicFacebookFeatures
             //listBoxGroups.Items.Clear();
             try
             {
-                List<string> userLikedGroups = r_FacebookLogicController.RetrieveGroups();
+                List<string> userLikedGroups = r_MainPage.RetrieveGroups();
 
                 if(userLikedGroups.Count > 0)
                 {
