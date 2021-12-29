@@ -11,6 +11,7 @@ namespace FacebookAppLogic
     public sealed class UserDataManager
     {
         private static UserDataManager s_Instance = null;
+        private FacebookObjectCollection<Album> m_Albums = null;
         private static object s_LockObj = new Object();
 
         private UserDataManager() { }
@@ -35,7 +36,23 @@ namespace FacebookAppLogic
         }
         public User User { get; set; }
         public bool IsAuthenticated { get; private set; }
-        public FacebookObjectCollection<Album> UserAlbums { get; set; }
+        public FacebookObjectCollection<Album> UserAlbums {
+            get {
+                try
+                {
+                    if (m_Albums == null)
+                    {
+                        m_Albums = User.Albums;
+                    }
+                    return m_Albums;
+                }
+                catch (Exception exception)
+                {
+                    throw new Exception("Error: Failed to fetch album list, please try again");
+                } 
+            }
+
+        }
         public void Login()
         {
             IsAuthenticated = false;
@@ -64,6 +81,7 @@ namespace FacebookAppLogic
         }
         public void Logout()
         {
+            IsAuthenticated = false;
             FacebookService.Logout(null);
             User = null;
         }

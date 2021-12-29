@@ -10,30 +10,20 @@ namespace FacebookAppLogic
 
         public FacebookFilteredImages()
         {
-            //r_Albums = i_User.Albums;
             Filters = new Filters();
             Albums = null;
             FilteredPhotos = new List<Photo>();
         }
-
-        public enum eDataOptions
-        {
-            Comments = 0,
-            LikedBy,
-            Tags
-        }
-
-        public Photo SelectedPhoto { get; set; } = null;
         public Filters Filters { get; set; }
         public FacebookObjectCollection<Album> Albums { get; private set; }
         public List<Photo> FilteredPhotos { get; private set; }
 
-        public void FetchFilteredPhotos()
+        public List<Photo> FetchFilteredPhotos()
         {
             FilteredPhotos.Clear();
             if(Albums==null)
             {
-                Albums = UserDataManager.Instance.User.Albums;
+                Albums = UserDataManager.Instance.UserAlbums;
             }
 
             if (Filters.SelectedAlbumIndex == null)
@@ -47,6 +37,7 @@ namespace FacebookAppLogic
             {
                 searchInAlbum(Albums[(int)Filters.SelectedAlbumIndex]);
             }
+            return FilteredPhotos;
         }
 
         private void searchInAlbum(Album i_Album)
@@ -89,69 +80,17 @@ namespace FacebookAppLogic
             }
         }
 
-        public void SortPhotoListByLikes()
+        public List<Photo> SortPhotoListByLikes()
         {
+
             FilteredPhotos = FilteredPhotos.OrderByDescending(o => o.LikedBy.Count).ToList();
+            return FilteredPhotos;
         }
 
-        public void SortPhotoListByCreatedTime()
+        public List<Photo> SortPhotoListByCreatedTime()
         {
             FilteredPhotos = FilteredPhotos.OrderByDescending(o => o.CreatedTime).ToList();
-        }
-
-        public List<string> SelectedImageData(int i_ChosenData)
-        {
-            List<string> photoData = new List<string>();
-            if(SelectedPhoto != null)
-            {
-                switch((eDataOptions)i_ChosenData)
-                {
-                    case eDataOptions.Comments:
-                        addSelectedImageComments(photoData);
-                        break;
-                    case eDataOptions.LikedBy:
-                        addSelectedImageLikedBy(photoData);
-                        break;
-                    case eDataOptions.Tags:
-                        addSelectedImageTagedUsers(photoData);
-                        break;
-                }
-            }
-
-            return photoData;
-        }
-
-        private void addSelectedImageComments(List<string> i_Data)
-        {
-            if(SelectedPhoto.Comments != null)
-            {
-                foreach(Comment comment in SelectedPhoto.Comments)
-                {
-                    i_Data.Add(comment.Message);
-                }
-            }
-        }
-
-        private void addSelectedImageLikedBy(List<string> i_Data)
-        {
-            if(SelectedPhoto.LikedBy != null)
-            {
-                foreach(User user in SelectedPhoto.LikedBy)
-                {
-                    i_Data.Add(user.Name);
-                }
-            }
-        }
-
-        private void addSelectedImageTagedUsers(List<string> i_Data)
-        {
-            if(SelectedPhoto.Tags != null)
-            {
-                foreach(PhotoTag Tag in SelectedPhoto.Tags)
-                {
-                    i_Data.Add(Tag.User.Name);
-                }
-            }
+            return FilteredPhotos;
         }
     }
 }

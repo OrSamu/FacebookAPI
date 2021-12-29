@@ -23,9 +23,7 @@ namespace BasicFacebookFeatures
             r_LoginForm = i_LoginForm;
             r_FacebookLogicController = i_FacebookLogicController;
             r_LoginForm.Visible = false;
-
-            //runs on different thread
-            //retrieveUserProfileData();
+            //UserProfileData();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -64,7 +62,7 @@ namespace BasicFacebookFeatures
 
         private void AdvancedImageSearch_Click(object sender, EventArgs e)
         {
-            AdvancedImageForm form = new AdvancedImageForm();
+            AdvancedImageSearchForm form = new AdvancedImageSearchForm();
             form.ShowDialog();
         }
 
