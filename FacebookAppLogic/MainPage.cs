@@ -43,40 +43,19 @@ namespace FacebookAppLogic
             return r_UserDataManager.RetrieveCommentsForStatus(i_StatusIndex);
         }
 
-        public List<string> RetrieveEvents()
+        public FacebookObjectCollection<Event> RetrieveEvents()
         {
-            List<string> eventsList = new List<string>();
-
-            foreach(Event userEvent in r_UserDataManager.RetrieveEvents())
-            {
-                eventsList.Add(userEvent.Name);
-            }
-
-            return eventsList;
+            return r_UserDataManager.RetrieveEvents();
         }
 
-        public List<string> RetrievePages()
+        public FacebookObjectCollection<Page> RetrievePages()
         {
-            List<string> pagesList = new List<string>();
-
-            foreach (Page page in r_UserDataManager.RetrievePages())
-            {
-                pagesList.Add(page.Name);
-            }
-
-            return pagesList;
+            return r_UserDataManager.RetrievePages();
         }
 
-        public List<string> RetrieveGroups()
+        public FacebookObjectCollection<Group> RetrieveGroups()
         {
-            List<string> groupsList = new List<string>();
-
-            foreach (Group group in r_UserDataManager.RetrieveGroups())
-            {
-                groupsList.Add(group.Name);
-            }
-
-            return groupsList;
+            return r_UserDataManager.RetrieveGroups();
         }
 
         public void PostStatus(string i_StatusToPost)

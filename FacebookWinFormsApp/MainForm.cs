@@ -20,13 +20,12 @@ namespace BasicFacebookFeatures
 
         public MainForm(LoginForm i_LoginForm, FacebookLogicController i_FacebookLogicController)
         {
+            r_MainPage = new MainPage();
+
             InitializeComponent();
             this.FormClosing += MainForm_FormClosing;
             r_LoginForm = i_LoginForm;
-            //r_FacebookLogicController = i_FacebookLogicController;
             r_LoginForm.Visible = false;
-            r_MainPage = new MainPage();
-
             //runs on different thread
             //retrieveUserProfileData();
         }
@@ -118,7 +117,6 @@ namespace BasicFacebookFeatures
                     foreach (string status in userPostedStatuses)
                     {
                         listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add(status)));
-                        //listboxposts.items.add(status);
                     }
                 }
                 else
@@ -134,7 +132,6 @@ namespace BasicFacebookFeatures
 
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //listBoxComments.Items.Clear();
             try
             {
                 List<string> commentsForStatus = r_MainPage.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
@@ -159,24 +156,9 @@ namespace BasicFacebookFeatures
 
         private void showUserEvents()
         {
-            //listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Clear()));
             try
             {
-                List<string> userEvents = r_MainPage.RetrieveEvents();
-
-                if (userEvents.Count > 0)
-                {
-                    foreach (string facebookEventName in userEvents)
-                    {
-                        listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(facebookEventName)));
-                        //listBoxEvents.Items.Add(facebookEventName);
-                    }
-                }
-                else
-                {
-                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(k_EmptyDataRetrieved)));
-                    //listBoxEvents.Items.Add(k_EmptyDataRetrieved);
-                }
+                listBoxEvents.Invoke(new Action(()=> eventBindingSource.DataSource = r_MainPage.RetrievePages()));
             }
             catch (Exception exception)
             {
@@ -186,22 +168,9 @@ namespace BasicFacebookFeatures
 
         private void showUserPages()
         {
-            //listBoxPages.Items.Clear();
             try
-            {
-                List<string> userLikedPages = r_MainPage.RetrievePages();
-
-                if (userLikedPages.Count > 0)
-                {
-                    foreach (string likedPageName in userLikedPages)
-                    {
-                        listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add(likedPageName)));
-                    }
-                }
-                else
-                {
-                    listBoxPages.Items.Add(k_EmptyDataRetrieved);
-                }
+            { 
+                listBoxPages.Invoke(new Action(() => pageBindingSource.DataSource = r_MainPage.RetrievePages()));
             }
             catch (Exception exception)
             {
@@ -209,30 +178,22 @@ namespace BasicFacebookFeatures
             }
         }
 
+
         private void showUserGroups()
         {
-            //listBoxGroups.Items.Clear();
             try
             {
-                List<string> userLikedGroups = r_MainPage.RetrieveGroups();
-
-                if(userLikedGroups.Count > 0)
-                {
-                    foreach (string likedGroupName in userLikedGroups)
-                    {
-                        listBoxGroups.Invoke(new Action(() => listBoxGroups.Items.Add(likedGroupName)));
-                        //listBoxGroups.Items.Add(likedGroupName);
-                    }
-                }
-                else
-                {
-                    listBoxGroups.Items.Add(k_EmptyDataRetrieved);
-                }
+                listBoxGroups.Invoke(new Action(() => groupBindingSource.DataSource = r_MainPage.RetrieveGroups()));
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+        }
+
+        private void commentsBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
