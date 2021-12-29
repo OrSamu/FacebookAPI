@@ -179,8 +179,7 @@ namespace BasicFacebookFeatures
 
             labelLikes.Text = "Likes:" + r_AdvanceImageSearch.GetAmountOfLikesOfSelectedPhoto();
             labelComments.Text = "Comments:" + r_AdvanceImageSearch.GetAmountOfCommentsOfSelectedPhoto();
-
-            updateListBoxData();
+            new Thread(updateListBoxData).Start();
         }
 
         private void m_ComboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -206,7 +205,6 @@ namespace BasicFacebookFeatures
             {
                 if(comboBoxShowData.SelectedIndex>=0)
                 {
-                    //maybe need to fix, to send the data itself instead of unboxing
                     IPhotoData photoData = (comboBoxShowData.SelectedItem as IPhotoData);
                     listBoxPictureData.Items.Clear();
                     
@@ -216,8 +214,7 @@ namespace BasicFacebookFeatures
                     {
                         foreach (string data in imageData)
                         {
-                            listBoxPictureData.Items.Add(data);
-                            //listBoxPictureData.Invoke(new Action(() => listBoxPictureData.Items.Add(data)));
+                            listBoxPictureData.Invoke(new Action(() => listBoxPictureData.Items.Add(data)));
 
                         }
                     }
@@ -232,8 +229,7 @@ namespace BasicFacebookFeatures
 
         private void comboBoxShowData_SelectedIndexChanged(object sender, EventArgs e)
         {
-            updateListBoxData();
-            //new Thread(updateListBoxData).Start();
+            new Thread(updateListBoxData).Start();
         }
     }
 }

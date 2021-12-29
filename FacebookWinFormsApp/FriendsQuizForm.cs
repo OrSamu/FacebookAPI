@@ -9,17 +9,17 @@ namespace BasicFacebookFeatures
     {
         private const string k_QuizCheckError = "You should run a new quiz to do that";
 
-        private readonly FacebooksFriends r_UserfacebooksFriends;
+        private readonly QuizPage r_QuizPage;
         private string m_FriendsBirthday;
         private string m_FriendsCity;
         private string m_FriendsCountry;
         private string m_FriendsRelationshipStatus;
         private bool m_QuizInProgress;
 
-        public FriendsQuizForm(FacebookLogicController i_FacebookLogicController)
+        public FriendsQuizForm()
         {
             InitializeComponent();
-            r_UserfacebooksFriends = new FacebooksFriends(i_FacebookLogicController);
+            r_QuizPage = new QuizPage();
             m_QuizInProgress = false;
         }
 
@@ -33,10 +33,9 @@ namespace BasicFacebookFeatures
 
         private void pickAndShowRandomFriend()
         {
-            r_UserfacebooksFriends.PickRandomFriend();
-            randomFriendPictureBox.ImageLocation = r_UserfacebooksFriends.RandomFriend.PictureNormalURL;
-            randomFriendNameLabel.Text = r_UserfacebooksFriends.RandomFriend.FirstName + ' '
-                                         + r_UserfacebooksFriends.RandomFriend.LastName;
+            r_QuizPage.PickRandomFriend();
+            randomFriendPictureBox.ImageLocation = r_QuizPage.RetrieveFriendProfilePic();
+            randomFriendNameLabel.Text = r_QuizPage.RetrieveFriendName();
         }
 
         private void retrieveAnswersForQuiz()
@@ -72,7 +71,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                m_FriendsBirthday = r_UserfacebooksFriends.RandomFriend.Birthday;
+                m_FriendsBirthday = r_QuizPage.RetrieveFriendBirthday();
             }
             catch(Exception exception)
             {
@@ -84,7 +83,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                m_FriendsCity = r_UserfacebooksFriends.RandomFriend.Location.Location.City;
+                m_FriendsCity = r_QuizPage.RetrieveFriendsCity();
             }
             catch(Exception exception)
             {
@@ -96,7 +95,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                m_FriendsCountry = r_UserfacebooksFriends.RandomFriend.Location.Location.Country;
+                m_FriendsCountry = r_QuizPage.RetrieveFriendsCountry();
             }
             catch(Exception exception)
             {
@@ -108,7 +107,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                m_FriendsRelationshipStatus = r_UserfacebooksFriends.RandomFriend.RelationshipStatus.ToString();
+                m_FriendsRelationshipStatus = r_QuizPage.RetrieveFriendsRelationshipStatus();
             }
             catch(Exception exception)
             {

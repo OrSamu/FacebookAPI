@@ -6,8 +6,6 @@ namespace FacebookAppLogic
 {
     public class FacebookFilteredImages
     {
-        //private readonly FacebookObjectCollection<Album> r_Albums = null;
-
         public FacebookFilteredImages()
         {
             Filters = new Filters();
@@ -64,19 +62,19 @@ namespace FacebookAppLogic
             }
         }
 
-        private void filterByDate(Photo photo)
+        private void filterByDate(Photo i_Photo)
         {
             if (Filters.MinCreationDate != null)
             {
-                if (photo.CreatedTime >= Filters.MinCreationDate
-                   && photo.CreatedTime <= Filters.MaxCreationDate)
+                if (i_Photo.CreatedTime >= Filters.MinCreationDate
+                   && i_Photo.CreatedTime <= Filters.MaxCreationDate)
                 {
-                    FilteredPhotos.Add(photo);
+                    FilteredPhotos.Add(i_Photo);
                 }
             }
             else
             {
-                FilteredPhotos.Add(photo);
+                FilteredPhotos.Add(i_Photo);
             }
         }
 

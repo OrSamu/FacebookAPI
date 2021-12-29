@@ -5,15 +5,17 @@ namespace FacebookAppLogic
 {
     public class FacebooksFriends
     {
+        private readonly UserDataManager r_UserDataManager;
         private readonly FacebookObjectCollection<User> r_FriendsList;
         private readonly int r_FriendsListLength;
         private readonly Random r_RandomNumber = new Random();
 
         public User RandomFriend { get; private set; }
 
-        public FacebooksFriends(FacebookLogicController i_FacebookLogicController)
+        public FacebooksFriends()
         {
-            r_FriendsList = i_FacebookLogicController.RetrieveFriends();
+            r_UserDataManager = UserDataManager.Instance;
+            r_FriendsList = r_UserDataManager.RetrieveFriends();
             r_FriendsListLength = r_FriendsList.Count;
         }
 

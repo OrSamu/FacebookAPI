@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FacebookAppLogic
 {
-    class LoginPage
+    public class LoginPage
     {
         private readonly UserDataManager r_UserDataManager;
+        
         public LoginPage()
         {
             r_UserDataManager = UserDataManager.Instance;
@@ -16,10 +17,6 @@ namespace FacebookAppLogic
         public void Login()
         {
             r_UserDataManager.Login();
-        }
-        public void Logout()
-        {
-            r_UserDataManager.Logout();
         }
         public bool IsAuthenticated()
         {

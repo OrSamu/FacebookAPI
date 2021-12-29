@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CefSharp.DevTools.Database;
 using System.Threading;
 using FacebookAppLogic;
+using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
@@ -14,16 +15,16 @@ namespace BasicFacebookFeatures
         private const string k_ErrorForTryingToPostEmptyStatus = "Error - can't post empty status";
 
         private readonly LoginForm r_LoginForm;
-        private readonly FacebookLogicController r_FacebookLogicController;
-        
-        public MainForm(LoginForm i_LoginForm, FacebookLogicController i_FacebookLogicController)
+        private readonly MainPage r_MainPage;
+
+        public MainForm(LoginForm i_LoginForm)
         {
+            r_MainPage = new MainPage();
+
             InitializeComponent();
             this.FormClosing += MainForm_FormClosing;
             r_LoginForm = i_LoginForm;
-            r_FacebookLogicController = i_FacebookLogicController;
             r_LoginForm.Visible = false;
-            //UserProfileData();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -39,8 +40,8 @@ namespace BasicFacebookFeatures
 
         private void retrieveUserProfileData()
         {
-            profilePictureBox.ImageLocation = r_FacebookLogicController.RetrieveProfilePicture();
-            usernameLabel.Text = r_FacebookLogicController.RetrieveUsername();
+            profilePictureBox.ImageLocation = UserDataManager.Instance.RetrieveProfilePicture();
+            usernameLabel.Text = UserDataManager.Instance.RetrieveUsername();
             new Thread(showUserStatuses).Start();
             new Thread(showUserGroups).Start();
             new Thread(showUserEvents).Start();
@@ -49,14 +50,13 @@ namespace BasicFacebookFeatures
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            //r_FacebookLogicController.Logout();
             r_LoginForm.Visible = true;
             Close();
         }
 
         private void friendsGameButton_Click(object sender, EventArgs e)
         {
-            FriendsQuizForm friendQuizForm = new FriendsQuizForm(r_FacebookLogicController);
+            FriendsQuizForm friendQuizForm = new FriendsQuizForm();
             friendQuizForm.ShowDialog();
         }
 
@@ -88,7 +88,7 @@ namespace BasicFacebookFeatures
                     MessageBox.Show(k_ErrorForTryingToPostEmptyStatus);
                 }
 
-                r_FacebookLogicController.PostStatus(statusTextBox.Text);
+                r_MainPage.PostStatus(statusTextBox.Text);
                 listBoxPosts.Items.Add(statusTextBox.Text);
             }
             catch(Exception exception)
@@ -106,14 +106,13 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                List<string> userPostedStatuses = r_FacebookLogicController.RetrievePostedStatuses();
-                
+                List<string> userPostedStatuses = r_MainPage.RetrievePostedStatuses();
+
                 if (userPostedStatuses.Count > 0)
                 {
                     foreach (string status in userPostedStatuses)
                     {
                         listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add(status)));
-                        //listboxposts.items.add(status);
                     }
                 }
                 else
@@ -129,10 +128,9 @@ namespace BasicFacebookFeatures
 
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //listBoxComments.Items.Clear();
             try
             {
-                List<string> commentsForStatus = r_FacebookLogicController.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
+                List<string> commentsForStatus = r_MainPage.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
 
                 if (commentsForStatus.Count > 0)
                 {
@@ -154,24 +152,9 @@ namespace BasicFacebookFeatures
 
         private void showUserEvents()
         {
-            //listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Clear()));
             try
             {
-                List<string> userEvents = r_FacebookLogicController.RetrieveEvents();
-
-                if (userEvents.Count > 0)
-                {
-                    foreach (string facebookEventName in userEvents)
-                    {
-                        listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(facebookEventName)));
-                        //listBoxEvents.Items.Add(facebookEventName);
-                    }
-                }
-                else
-                {
-                    listBoxEvents.Invoke(new Action(() => listBoxEvents.Items.Add(k_EmptyDataRetrieved)));
-                    //listBoxEvents.Items.Add(k_EmptyDataRetrieved);
-                }
+                listBoxEvents.Invoke(new Action(()=> eventBindingSource.DataSource = r_MainPage.RetrievePages()));
             }
             catch (Exception exception)
             {
@@ -181,22 +164,9 @@ namespace BasicFacebookFeatures
 
         private void showUserPages()
         {
-            //listBoxPages.Items.Clear();
             try
-            {
-                List<string> userLikedPages = r_FacebookLogicController.RetrievePages();
-
-                if (userLikedPages.Count > 0)
-                {
-                    foreach (string likedPageName in userLikedPages)
-                    {
-                        listBoxPages.Invoke(new Action(() => listBoxPages.Items.Add(likedPageName)));
-                    }
-                }
-                else
-                {
-                    listBoxPages.Items.Add(k_EmptyDataRetrieved);
-                }
+            { 
+                listBoxPages.Invoke(new Action(() => pageBindingSource.DataSource = r_MainPage.RetrievePages()));
             }
             catch (Exception exception)
             {
@@ -204,30 +174,22 @@ namespace BasicFacebookFeatures
             }
         }
 
+
         private void showUserGroups()
         {
-            //listBoxGroups.Items.Clear();
             try
             {
-                List<string> userLikedGroups = r_FacebookLogicController.RetrieveGroups();
-
-                if(userLikedGroups.Count > 0)
-                {
-                    foreach (string likedGroupName in userLikedGroups)
-                    {
-                        listBoxGroups.Invoke(new Action(() => listBoxGroups.Items.Add(likedGroupName)));
-                        //listBoxGroups.Items.Add(likedGroupName);
-                    }
-                }
-                else
-                {
-                    listBoxGroups.Items.Add(k_EmptyDataRetrieved);
-                }
+                listBoxGroups.Invoke(new Action(() => groupBindingSource.DataSource = r_MainPage.RetrieveGroups()));
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+        }
+
+        private void commentsBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
