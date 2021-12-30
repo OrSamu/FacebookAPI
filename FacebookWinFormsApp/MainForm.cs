@@ -15,10 +15,9 @@ namespace BasicFacebookFeatures
         private const string k_ErrorForTryingToPostEmptyStatus = "Error - can't post empty status";
 
         private readonly LoginForm r_LoginForm;
-        //private readonly FacebookLogicController r_FacebookLogicController;
         private readonly MainPage r_MainPage;
 
-        public MainForm(LoginForm i_LoginForm, FacebookLogicController i_FacebookLogicController)
+        public MainForm(LoginForm i_LoginForm)
         {
             r_MainPage = new MainPage();
 
@@ -26,8 +25,6 @@ namespace BasicFacebookFeatures
             this.FormClosing += MainForm_FormClosing;
             r_LoginForm = i_LoginForm;
             r_LoginForm.Visible = false;
-            //runs on different thread
-            //retrieveUserProfileData();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -53,7 +50,6 @@ namespace BasicFacebookFeatures
 
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            //r_FacebookLogicController.Logout();
             r_LoginForm.Visible = true;
             Close();
         }
@@ -66,7 +62,7 @@ namespace BasicFacebookFeatures
 
         private void AdvancedImageSearch_Click(object sender, EventArgs e)
         {
-            AdvancedImageForm form = new AdvancedImageForm();
+            AdvancedImageSearchForm form = new AdvancedImageSearchForm();
             form.ShowDialog();
         }
 

@@ -11,6 +11,7 @@ namespace FacebookAppLogic
     public sealed class UserDataManager
     {
         private static UserDataManager s_Instance = null;
+        private FacebookObjectCollection<Album> m_Albums = null;
         private static object s_LockObj = new Object();
         private string m_ProfilePictureURL = null;
         private string m_UserName = null;
@@ -40,9 +41,25 @@ namespace FacebookAppLogic
                 return s_Instance;
             }
         }
-        public User User { get; set; }
+        public User User { get;private set; }
         public bool IsAuthenticated { get; private set; }
-        public FacebookObjectCollection<Album> UserAlbums { get; set; }
+
+        public FacebookObjectCollection<Album> RetrieveUserAlbums ()
+        {
+            try
+            {
+                if (m_Albums == null)
+                {
+                    m_Albums = User.Albums;
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Error - failed to retrieve user album");
+            }
+
+            return m_Albums;
+        }
         public void Login()
         {
             IsAuthenticated = false;
@@ -71,6 +88,7 @@ namespace FacebookAppLogic
         }
         public void Logout()
         {
+            IsAuthenticated = false;
             FacebookService.Logout(null);
             User = null;
         }

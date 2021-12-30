@@ -1,6 +1,6 @@
 ﻿namespace BasicFacebookFeatures
 {
-    partial class AdvancedImageForm
+    partial class AdvancedImageSearchForm
     {
         /// <summary>
         /// Required designer variable.
@@ -56,12 +56,16 @@
             this.comboBoxTaggedFriend = new System.Windows.Forms.ComboBox();
             this.numericUpDownLikes = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanelImages = new System.Windows.Forms.FlowLayoutPanel();
+            this.selectedImageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.filtersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLikes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedImageBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filtersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxShowData
@@ -180,7 +184,7 @@
             this.listBoxPictureData.ItemHeight = 25;
             this.listBoxPictureData.Location = new System.Drawing.Point(544, 634);
             this.listBoxPictureData.Name = "listBoxPictureData";
-            this.listBoxPictureData.Size = new System.Drawing.Size(534, 204);
+            this.listBoxPictureData.Size = new System.Drawing.Size(534, 179);
             this.listBoxPictureData.TabIndex = 37;
             // 
             // comboBoxAlbumsNames
@@ -376,17 +380,25 @@
             this.flowLayoutPanelImages.Size = new System.Drawing.Size(492, 345);
             this.flowLayoutPanelImages.TabIndex = 53;
             // 
+            // selectedImageBindingSource
+            // 
+            this.selectedImageBindingSource.DataSource = typeof(FacebookAppLogic.SelectedImage);
+            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // AdvancedImageForm
+            // filtersBindingSource
+            // 
+            this.filtersBindingSource.DataSource = typeof(FacebookAppLogic.Filters);
+            // 
+            // AdvancedImageSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 878);
+            this.ClientSize = new System.Drawing.Size(1108, 935);
             this.Controls.Add(this.flowLayoutPanelImages);
             this.Controls.Add(this.numericUpDownLikes);
             this.Controls.Add(this.comboBoxTaggedFriend);
@@ -411,7 +423,7 @@
             this.Controls.Add(this.m_DateTimePickerFromDate);
             this.Controls.Add(this.minLikesLabel);
             this.Controls.Add(this.pictureBoxSelectedImage);
-            this.Name = "AdvancedImageForm";
+            this.Name = "AdvancedImageSearchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Advanced Image Search";
             this.backgroundPanel.ResumeLayout(false);
@@ -420,6 +432,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLikes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedImageBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filtersBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -455,5 +469,7 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.BindingSource selectedImageBindingSource;
+        private System.Windows.Forms.BindingSource filtersBindingSource;
     }
 }
