@@ -66,9 +66,5 @@ namespace FacebookAppLogic
         {
             return r_FacebookFilteredImages.SortPhotoListByCreatedTime();
         }
-        public FacebookObjectCollection<Album> GetUserAlmbums()
-        {
-            return r_FacebookFilteredImages.Albums;
-        }
     }
 }

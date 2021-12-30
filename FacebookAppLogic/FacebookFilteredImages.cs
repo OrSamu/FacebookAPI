@@ -21,7 +21,7 @@ namespace FacebookAppLogic
             FilteredPhotos.Clear();
             if(Albums==null)
             {
-                Albums = UserDataManager.Instance.UserAlbums;
+                Albums = UserDataManager.Instance.RetrieveUserAlbums();
             }
 
             if (Filters.SelectedAlbumIndex == null)

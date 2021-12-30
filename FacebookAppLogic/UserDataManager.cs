@@ -41,24 +41,24 @@ namespace FacebookAppLogic
                 return s_Instance;
             }
         }
-        public User User { get; set; }
+        public User User { get;private set; }
         public bool IsAuthenticated { get; private set; }
-        public FacebookObjectCollection<Album> UserAlbums {
-            get {
-                try
+
+        public FacebookObjectCollection<Album> RetrieveUserAlbums ()
+        {
+            try
+            {
+                if (m_Albums == null)
                 {
-                    if (m_Albums == null)
-                    {
-                        m_Albums = User.Albums;
-                    }
-                    return m_Albums;
+                    m_Albums = User.Albums;
                 }
-                catch (Exception exception)
-                {
-                    throw new Exception("Error: Failed to fetch album list, please try again");
-                } 
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Error - failed to retrieve user album");
             }
 
+            return m_Albums;
         }
         public void Login()
         {

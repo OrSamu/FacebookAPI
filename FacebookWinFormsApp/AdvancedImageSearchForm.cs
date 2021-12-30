@@ -30,7 +30,7 @@ namespace BasicFacebookFeatures
 
         private void createAlbumListBox()
         {
-            foreach (Album album in UserDataManager.Instance.UserAlbums)
+            foreach (Album album in UserDataManager.Instance.RetrieveUserAlbums())
             {
                 comboBoxAlbumsNames.Items.Add(album.Name);
             }
