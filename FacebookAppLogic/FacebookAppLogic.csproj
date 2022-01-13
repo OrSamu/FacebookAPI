@@ -38,10 +38,21 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="FacebookImages.cs" />
-    <Compile Include="FacebookLogicController.cs" />
+    <Compile Include="AdvanceImageSearch.cs" />
+    <Compile Include="FacebookFilteredImages.cs" />
     <Compile Include="FacebooksFriends.cs" />
     <Compile Include="Filters.cs" />
+    <Compile Include="IPhotoData.cs" />
+    <Compile Include="LoginPage.cs" />
+    <Compile Include="PhotoComments.cs" />
+    <Compile Include="PhotoLikes.cs" />
+    <Compile Include="PhotoTags.cs" />
+    <Compile Include="SelectedImage.cs" />
+    <Compile Include="IStatusFormat.cs" />
+    <Compile Include="MainPage.cs" />
+    <Compile Include="QuizPage.cs" />
+    <Compile Include="StatusAdapter.cs" />
+    <Compile Include="UserDataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Facebook">
@@ -51,6 +62,9 @@
       <HintPath>..\FBApi\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
