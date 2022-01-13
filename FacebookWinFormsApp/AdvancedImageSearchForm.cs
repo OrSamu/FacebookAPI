@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookAppLogic;
 using System.Threading;
+
 namespace BasicFacebookFeatures
 {
     public partial class AdvancedImageSearchForm : Form
@@ -17,7 +18,6 @@ namespace BasicFacebookFeatures
         private const string k_GreenHexCode = "#39B54A";
         private readonly AdvanceImageSearch r_AdvanceImageSearch;
 
-
         public AdvancedImageSearchForm()
         {
             r_AdvanceImageSearch = new AdvanceImageSearch();
@@ -30,7 +30,7 @@ namespace BasicFacebookFeatures
 
         private void createAlbumListBox()
         {
-            foreach (Album album in UserDataManager.Instance.RetrieveUserAlbums())
+            foreach(Album album in r_AdvanceImageSearch.RetrieveUserAlbums())
             {
                 comboBoxAlbumsNames.Items.Add(album.Name);
             }
@@ -38,12 +38,12 @@ namespace BasicFacebookFeatures
 
         private void createFriendListBox()
         {
-
-            foreach (User friendUser in UserDataManager.Instance.User.Friends)
+            foreach(User friendUser in r_AdvanceImageSearch.RetrieveUserFriends())
             {
                 comboBoxTaggedFriend.Items.Add(friendUser.Name);
             }
         }
+
         private void createImageDataListBox()
         {
             comboBoxShowData.Items.Add(r_AdvanceImageSearch.GetLikesDataType());
@@ -51,30 +51,30 @@ namespace BasicFacebookFeatures
             comboBoxShowData.Items.Add(r_AdvanceImageSearch.GetTagsDataType());
         }
 
-        private void m_CheckBoxDate_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxDate_CheckedChanged(object sender, EventArgs e)
         {
             m_DateTimePickerFromDate.Enabled = checkBoxDate.Checked;
             dateTimePickerToDate.Enabled = checkBoxDate.Checked;
         }
 
-        private void m_CheckBoxLikes_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxLikes_CheckedChanged(object sender, EventArgs e)
         {
             numericUpDownLikes.Enabled = checkBoxLikes.Checked;
         }
 
-        private void m_CheckBoxAlbum_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxAlbum_CheckedChanged(object sender, EventArgs e)
         {
             comboBoxAlbumsNames.Enabled = checkBoxAlbum.Checked;
         }
 
-        private void m_CheckBoxTaggedFriends_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxTaggedFriends_CheckedChanged(object sender, EventArgs e)
         {
             comboBoxTaggedFriend.Enabled = checkBoxTaggedFriends.Checked;
         }
 
-        private void m_ButtonSearch_Click(object sender, EventArgs e)
+        private void buttonSearch_Click(object sender, EventArgs e)
         {
-            if (fecthFilters(r_AdvanceImageSearch.GetFilters()))
+            if(fecthFilters(r_AdvanceImageSearch.GetFilters()))
             {
                 buttonSearch.Text = "Loading...";
                 buttonSearch.Enabled = false;
@@ -83,14 +83,14 @@ namespace BasicFacebookFeatures
                 listBoxPictureData.Items.Clear();
                 new Thread(showFilteredPhotos).Start();
             }
-                
         }
+
         private void showFilteredPhotos()
         {
             try
             {
                 List<Photo> gridPhotos = r_AdvanceImageSearch.GetFilteredImages();
-                if (gridPhotos.Count == 0)
+                if(gridPhotos.Count == 0)
                 {
                     MessageBox.Show(k_NoPhotosFoundError);
                 }
@@ -100,14 +100,16 @@ namespace BasicFacebookFeatures
                     comboBoxSortBy.Invoke(new Action(() => comboBoxSortBy.Enabled = true));
                 }
 
-                buttonSearch.Invoke(new Action(() =>
-                {
-                    buttonSearch.Text = "Search";
-                    buttonSearch.Enabled = true;
-                    buttonSearch.BackColor = System.Drawing.ColorTranslator.FromHtml(k_GreenHexCode);
-                }));
+                buttonSearch.Invoke(
+                    new Action(
+                        () =>
+                            {
+                                buttonSearch.Text = "Search";
+                                buttonSearch.Enabled = true;
+                                buttonSearch.BackColor = System.Drawing.ColorTranslator.FromHtml(k_GreenHexCode);
+                            }));
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -120,7 +122,7 @@ namespace BasicFacebookFeatures
             i_Filters.SelectedAlbumIndex = checkBoxAlbum.Checked ? (int?)comboBoxAlbumsNames.SelectedIndex : null;
             i_Filters.TaggedFriend = checkBoxTaggedFriends.Checked ? comboBoxTaggedFriend.Text : null;
 
-            if (checkBoxDate.Checked)
+            if(checkBoxDate.Checked)
             {
                 i_Filters.MinCreationDate = m_DateTimePickerFromDate.Value;
                 i_Filters.MaxCreationDate = dateTimePickerToDate.Value;
@@ -131,44 +133,48 @@ namespace BasicFacebookFeatures
                 i_Filters.MaxCreationDate = null;
             }
 
-            if(i_Filters.SelectedAlbumIndex==-1)
+            if(i_Filters.SelectedAlbumIndex == -1)
             {
                 validInput = false;
                 MessageBox.Show(k_NoAlbumPickedError);
             }
-            if (checkBoxTaggedFriends.Checked && string.IsNullOrEmpty(i_Filters.TaggedFriend))
+
+            if(checkBoxTaggedFriends.Checked && string.IsNullOrEmpty(i_Filters.TaggedFriend))
             {
                 MessageBox.Show(k_NoTaggedPickedError);
                 validInput = false;
             }
+
             return validInput;
         }
 
         private void addPhotoToListBoxImagePanel(List<Photo> i_GridPhotos)
         {
-            if (flowLayoutPanelImages.Controls.Count != 0)
+            if(flowLayoutPanelImages.Controls.Count != 0)
             {
                 flowLayoutPanelImages.Invoke(new Action(() => flowLayoutPanelImages.Controls.Clear()));
             }
 
-            foreach (Photo photo in i_GridPhotos)
+            foreach(Photo photo in i_GridPhotos)
             {
-                flowLayoutPanelImages.Invoke(new Action(() =>
-                {
-                    GridPhoto picture = new GridPhoto(photo);
-                    picture.Click += Picture_Click;
-                    flowLayoutPanelImages.Controls.Add(picture);
-                }));
+                flowLayoutPanelImages.Invoke(
+                    new Action(
+                        () =>
+                            {
+                                GridPhoto picture = new GridPhoto(photo);
+                                picture.Click += picture_Click;
+                                flowLayoutPanelImages.Controls.Add(picture);
+                            }));
             }
         }
 
-        private void Picture_Click(object sender, EventArgs e)
+        private void picture_Click(object sender, EventArgs e)
         {
-            comboBoxShowData.Enabled = true;            
+            comboBoxShowData.Enabled = true;
             r_AdvanceImageSearch.SetSelectedImage((sender as GridPhoto).Photo);
             string SelectedImageURL = r_AdvanceImageSearch.GetURLOfSlectedPhoto();
 
-            if (SelectedImageURL != null)
+            if(SelectedImageURL != null)
             {
                 pictureBoxSelectedImage.LoadAsync(SelectedImageURL);
             }
@@ -182,11 +188,10 @@ namespace BasicFacebookFeatures
             new Thread(updateListBoxData).Start();
         }
 
-        private void m_ComboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            List<Photo> gridPhotos=null;
-            if (comboBoxSortBy.Text == k_SortByCreationDate)
+            List<Photo> gridPhotos = null;
+            if(comboBoxSortBy.Text == k_SortByCreationDate)
             {
                 gridPhotos = r_AdvanceImageSearch.GetFilteredImagesSortedCreationDate();
             }
@@ -203,25 +208,23 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                if(comboBoxShowData.SelectedIndex>=0)
+                if(comboBoxShowData.SelectedIndex >= 0)
                 {
                     IPhotoData photoData = (comboBoxShowData.SelectedItem as IPhotoData);
                     listBoxPictureData.Items.Clear();
-                    
-                    List<string> imageData= r_AdvanceImageSearch.GetDataOfSelectedImage(photoData);
 
-                    if (imageData.Count != 0)
+                    List<string> imageData = r_AdvanceImageSearch.GetDataOfSelectedImage(photoData);
+
+                    if(imageData.Count != 0)
                     {
-                        foreach (string data in imageData)
+                        foreach(string data in imageData)
                         {
                             listBoxPictureData.Invoke(new Action(() => listBoxPictureData.Items.Add(data)));
-
                         }
                     }
                 }
-
             }
-            catch (Exception er)
+            catch(Exception er)
             {
                 MessageBox.Show(er.Message);
             }

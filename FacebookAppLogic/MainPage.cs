@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
@@ -14,6 +10,11 @@ namespace FacebookAppLogic
         public MainPage()
         {
             r_UserDataManager = UserDataManager.Instance;
+        }
+
+        public void Logout()
+        {
+            UserDataManager.Instance.Logout();
         }
 
         public string RetrieveProfilePicture()

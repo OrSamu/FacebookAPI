@@ -21,14 +21,15 @@ namespace FacebookAppLogic
             }
         }
 
-        public int LikesAmount { get;private set; }
+        public int LikesAmount { get; private set; }
+
         public int CommentsAmount { get; private set; }
+
         public string PhotoURL { get; private set; }
 
         public List<string> FetchSelectedData(IPhotoData i_PhotoData)
         {
             return i_PhotoData.GetData(Photo);
         }
-
     }
 }

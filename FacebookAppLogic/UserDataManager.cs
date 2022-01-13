@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 
@@ -21,17 +18,19 @@ namespace FacebookAppLogic
         private FacebookObjectCollection<Event> m_EventsList = null;
         private FacebookObjectCollection<Group> m_GroupsList = null;
 
-        private UserDataManager() { }
+        private UserDataManager()
+        {
+        }
 
         public static UserDataManager Instance
         {
             get
             {
-                if (s_Instance == null)
+                if(s_Instance == null)
                 {
-                    lock (s_LockObj)
+                    lock(s_LockObj)
                     {
-                        if (s_Instance == null)
+                        if(s_Instance == null)
                         {
                             s_Instance = new UserDataManager();
                         }
@@ -41,31 +40,33 @@ namespace FacebookAppLogic
                 return s_Instance;
             }
         }
-        public User User { get;private set; }
+
+        public User User { get; private set; }
+
         public bool IsAuthenticated { get; private set; }
 
-        public FacebookObjectCollection<Album> RetrieveUserAlbums ()
+        public FacebookObjectCollection<Album> RetrieveUserAlbums()
         {
             try
             {
-                if (m_Albums == null)
+                if(m_Albums == null)
                 {
                     m_Albums = User.Albums;
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve user album");
             }
 
             return m_Albums;
         }
+
         public void Login()
         {
             IsAuthenticated = false;
             LoginResult loginResult = FacebookService.Login(
                 "973153713605868",
-
                 "user_likes",
                 "user_photos",
                 "user_posts",
@@ -80,12 +81,13 @@ namespace FacebookAppLogic
                 "groups_access_member_info",
                 "email");
 
-            if (!string.IsNullOrEmpty(loginResult.AccessToken))
+            if(!string.IsNullOrEmpty(loginResult.AccessToken))
             {
                 IsAuthenticated = true;
                 User = loginResult.LoggedInUser;
             }
         }
+
         public void Logout()
         {
             IsAuthenticated = false;
@@ -102,7 +104,7 @@ namespace FacebookAppLogic
                     m_ProfilePictureURL = User.PictureNormalURL;
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve profile picture");
             }
@@ -114,18 +116,19 @@ namespace FacebookAppLogic
         {
             try
             {
-                if (m_UserName == null)
+                if(m_UserName == null)
                 {
                     m_UserName = User.FirstName + ' ' + User.LastName;
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve username");
             }
 
             return m_UserName;
         }
+
         public FacebookObjectCollection<User> RetrieveFriends()
         {
             try
@@ -135,7 +138,7 @@ namespace FacebookAppLogic
                     m_FriendsList = User.Friends;
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve friends");
             }
@@ -152,7 +155,7 @@ namespace FacebookAppLogic
                     m_StatusesList = User.Posts;
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve posted statuses");
             }
@@ -166,12 +169,12 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Comment commentOnStatus in User.Posts[i_IndexForRelatedStatus].Comments)
+                foreach(Comment commentOnStatus in User.Posts[i_IndexForRelatedStatus].Comments)
                 {
                     commentsRelated.Add(commentOnStatus.Message);
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to retrieve comments");
             }
@@ -181,7 +184,6 @@ namespace FacebookAppLogic
 
         public FacebookObjectCollection<Event> RetrieveEvents()
         {
-
             try
             {
                 if(m_EventsList == null)
@@ -189,7 +191,7 @@ namespace FacebookAppLogic
                     m_EventsList = User.Events;
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to load events");
             }
@@ -199,15 +201,14 @@ namespace FacebookAppLogic
 
         public FacebookObjectCollection<Page> RetrievePages()
         {
-
             try
             {
-                if (m_PagesList == null)
+                if(m_PagesList == null)
                 {
                     m_PagesList = User.LikedPages;
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to load pages");
             }
@@ -217,15 +218,14 @@ namespace FacebookAppLogic
 
         public FacebookObjectCollection<Group> RetrieveGroups()
         {
-
             try
             {
-                if (m_GroupsList == null)
+                if(m_GroupsList == null)
                 {
                     m_GroupsList = User.Groups;
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to load groups");
             }
@@ -239,7 +239,7 @@ namespace FacebookAppLogic
             {
                 User.PostStatus(i_StatusToPost);
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - Failed to post status");
             }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FacebookAppLogic
 {
@@ -41,7 +37,7 @@ namespace FacebookAppLogic
             {
                 return r_UserfacebooksFriends.RandomFriend.Location.Location.City;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve friend's city");
             }
@@ -53,7 +49,7 @@ namespace FacebookAppLogic
             {
                 return r_UserfacebooksFriends.RandomFriend.Location.Location.Country;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve friend's country");
             }
@@ -65,7 +61,7 @@ namespace FacebookAppLogic
             {
                 return r_UserfacebooksFriends.RandomFriend.RelationshipStatus.ToString();
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw new Exception("Error - failed to retrieve friend's relationship status");
             }

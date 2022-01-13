@@ -12,19 +12,22 @@ namespace FacebookAppLogic
             Albums = null;
             FilteredPhotos = new List<Photo>();
         }
+
         public Filters Filters { get; set; }
+
         public FacebookObjectCollection<Album> Albums { get; private set; }
+
         public List<Photo> FilteredPhotos { get; private set; }
 
         public List<Photo> FetchFilteredPhotos()
         {
             FilteredPhotos.Clear();
-            if(Albums==null)
+            if(Albums == null)
             {
                 Albums = UserDataManager.Instance.RetrieveUserAlbums();
             }
 
-            if (Filters.SelectedAlbumIndex == null)
+            if(Filters.SelectedAlbumIndex == null)
             {
                 foreach(Album album in Albums)
                 {
@@ -35,6 +38,7 @@ namespace FacebookAppLogic
             {
                 searchInAlbum(Albums[(int)Filters.SelectedAlbumIndex]);
             }
+
             return FilteredPhotos;
         }
 
@@ -64,10 +68,9 @@ namespace FacebookAppLogic
 
         private void filterByDate(Photo i_Photo)
         {
-            if (Filters.MinCreationDate != null)
+            if(Filters.MinCreationDate != null)
             {
-                if (i_Photo.CreatedTime >= Filters.MinCreationDate
-                   && i_Photo.CreatedTime <= Filters.MaxCreationDate)
+                if(i_Photo.CreatedTime >= Filters.MinCreationDate && i_Photo.CreatedTime <= Filters.MaxCreationDate)
                 {
                     FilteredPhotos.Add(i_Photo);
                 }
@@ -80,7 +83,6 @@ namespace FacebookAppLogic
 
         public List<Photo> SortPhotoListByLikes()
         {
-
             FilteredPhotos = FilteredPhotos.OrderByDescending(o => o.LikedBy.Count).ToList();
             return FilteredPhotos;
         }

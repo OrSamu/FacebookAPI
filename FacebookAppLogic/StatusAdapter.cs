@@ -6,7 +6,6 @@ namespace FacebookAppLogic
 {
     public class StatusAdapter : IStatusFormat
     {
-
         private readonly Post r_OldFormatPost;
 
         public StatusAdapter(Post i_PostToFormat)
@@ -21,11 +20,11 @@ namespace FacebookAppLogic
                 StringBuilder newPost = new StringBuilder();
 
                 newPost.Append(string.Format("({0}): ", r_OldFormatPost.CreatedTime.ToString()));
-                if (r_OldFormatPost.Message != null)
+                if(r_OldFormatPost.Message != null)
                 {
                     newPost.Append(r_OldFormatPost.Message);
                 }
-                else if (r_OldFormatPost.Caption != null)
+                else if(r_OldFormatPost.Caption != null)
                 {
                     newPost.Append(r_OldFormatPost.Caption);
                 }

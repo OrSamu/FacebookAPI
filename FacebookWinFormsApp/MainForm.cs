@@ -29,7 +29,7 @@ namespace BasicFacebookFeatures
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UserDataManager.Instance.Logout();
+            r_MainPage.Logout();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -40,8 +40,8 @@ namespace BasicFacebookFeatures
 
         private void retrieveUserProfileData()
         {
-            profilePictureBox.ImageLocation = UserDataManager.Instance.RetrieveProfilePicture();
-            usernameLabel.Text = UserDataManager.Instance.RetrieveUsername();
+            profilePictureBox.ImageLocation = r_MainPage.RetrieveProfilePicture();
+            usernameLabel.Text = r_MainPage.RetrieveUsername();
             new Thread(showUserStatuses).Start();
             new Thread(showUserGroups).Start();
             new Thread(showUserEvents).Start();
@@ -69,7 +69,7 @@ namespace BasicFacebookFeatures
         private void statusTextBox_Click(object sender, EventArgs e)
         {
             bool isDefaultStatus = string.Equals(statusTextBox.Text, k_DefaultStatusText);
-            if (isDefaultStatus)
+            if(isDefaultStatus)
             {
                 statusTextBox.Clear();
             }
@@ -108,9 +108,9 @@ namespace BasicFacebookFeatures
             {
                 List<string> userPostedStatuses = r_MainPage.RetrievePostedStatuses();
 
-                if (userPostedStatuses.Count > 0)
+                if(userPostedStatuses.Count > 0)
                 {
-                    foreach (string status in userPostedStatuses)
+                    foreach(string status in userPostedStatuses)
                     {
                         listBoxPosts.Invoke(new Action(() => listBoxPosts.Items.Add(status)));
                     }
@@ -120,7 +120,7 @@ namespace BasicFacebookFeatures
                     listBoxPosts.Items.Add(k_EmptyDataRetrieved);
                 }
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
@@ -131,10 +131,10 @@ namespace BasicFacebookFeatures
             try
             {
                 List<string> commentsForStatus = r_MainPage.RetrieveCommentsForStatus(listBoxPosts.SelectedIndex);
-
-                if (commentsForStatus.Count > 0)
+                listBoxComments.Items.Clear();
+                if(commentsForStatus.Count > 0)
                 {
-                    foreach (string comment in commentsForStatus)
+                    foreach(string comment in commentsForStatus)
                     {
                         listBoxComments.Items.Add(comment);
                     }
@@ -154,9 +154,9 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                listBoxEvents.Invoke(new Action(()=> eventBindingSource.DataSource = r_MainPage.RetrievePages()));
+                listBoxEvents.Invoke(new Action(() => eventBindingSource.DataSource = r_MainPage.RetrievePages()));
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
@@ -165,15 +165,14 @@ namespace BasicFacebookFeatures
         private void showUserPages()
         {
             try
-            { 
+            {
                 listBoxPages.Invoke(new Action(() => pageBindingSource.DataSource = r_MainPage.RetrievePages()));
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
         }
-
 
         private void showUserGroups()
         {
@@ -181,7 +180,7 @@ namespace BasicFacebookFeatures
             {
                 listBoxGroups.Invoke(new Action(() => groupBindingSource.DataSource = r_MainPage.RetrieveGroups()));
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
@@ -189,7 +188,6 @@ namespace BasicFacebookFeatures
 
         private void commentsBindingSource_CurrentChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -142,7 +142,7 @@
             this.comboBoxSortBy.Size = new System.Drawing.Size(178, 33);
             this.comboBoxSortBy.TabIndex = 41;
             this.comboBoxSortBy.Text = "Sort by:";
-            this.comboBoxSortBy.SelectedIndexChanged += new System.EventHandler(this.m_ComboBoxSortBy_SelectedIndexChanged);
+            this.comboBoxSortBy.SelectedIndexChanged += new System.EventHandler(this.comboBoxSortBy_SelectedIndexChanged);
             // 
             // checkBoxAlbum
             // 
@@ -153,7 +153,7 @@
             this.checkBoxAlbum.Size = new System.Drawing.Size(22, 21);
             this.checkBoxAlbum.TabIndex = 40;
             this.checkBoxAlbum.UseVisualStyleBackColor = true;
-            this.checkBoxAlbum.CheckedChanged += new System.EventHandler(this.m_CheckBoxAlbum_CheckedChanged);
+            this.checkBoxAlbum.CheckedChanged += new System.EventHandler(this.checkBoxAlbum_CheckedChanged);
             // 
             // checkBoxLikes
             // 
@@ -164,7 +164,7 @@
             this.checkBoxLikes.Size = new System.Drawing.Size(22, 21);
             this.checkBoxLikes.TabIndex = 39;
             this.checkBoxLikes.UseVisualStyleBackColor = true;
-            this.checkBoxLikes.CheckedChanged += new System.EventHandler(this.m_CheckBoxLikes_CheckedChanged);
+            this.checkBoxLikes.CheckedChanged += new System.EventHandler(this.checkBoxLikes_CheckedChanged);
             // 
             // checkBoxDate
             // 
@@ -175,7 +175,7 @@
             this.checkBoxDate.Size = new System.Drawing.Size(22, 21);
             this.checkBoxDate.TabIndex = 38;
             this.checkBoxDate.UseVisualStyleBackColor = true;
-            this.checkBoxDate.CheckedChanged += new System.EventHandler(this.m_CheckBoxDate_CheckedChanged);
+            this.checkBoxDate.CheckedChanged += new System.EventHandler(this.checkBoxDate_CheckedChanged);
             // 
             // listBoxPictureData
             // 
@@ -301,7 +301,7 @@
             this.buttonSearch.TabIndex = 35;
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = false;
-            this.buttonSearch.Click += new System.EventHandler(this.m_ButtonSearch_Click);
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // label7
             // 
@@ -342,7 +342,7 @@
             this.checkBoxTaggedFriends.Size = new System.Drawing.Size(22, 21);
             this.checkBoxTaggedFriends.TabIndex = 50;
             this.checkBoxTaggedFriends.UseVisualStyleBackColor = true;
-            this.checkBoxTaggedFriends.CheckedChanged += new System.EventHandler(this.m_CheckBoxTaggedFriends_CheckedChanged);
+            this.checkBoxTaggedFriends.CheckedChanged += new System.EventHandler(this.checkBoxTaggedFriends_CheckedChanged);
             // 
             // comboBoxTaggedFriend
             // 
