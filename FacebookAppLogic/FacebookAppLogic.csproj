@@ -39,10 +39,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AdvanceImageSearch.cs" />
+    <Compile Include="BasicStatusFormat.cs" />
+    <Compile Include="DataRetriever.cs" />
+    <Compile Include="DetailedStatusFormat.cs" />
     <Compile Include="FacebookFilteredImages.cs" />
     <Compile Include="FacebooksFriends.cs" />
     <Compile Include="Filters.cs" />
     <Compile Include="IPhotoData.cs" />
+    <Compile Include="IStatusFormatStrategy.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="PhotoComments.cs" />
     <Compile Include="PhotoLikes.cs" />
@@ -52,7 +56,13 @@
     <Compile Include="MainPage.cs" />
     <Compile Include="QuizPage.cs" />
     <Compile Include="StatusAdapter.cs" />
+    <Compile Include="UserAlbumsDataRetriever.cs" />
     <Compile Include="UserDataManager.cs" />
+    <Compile Include="UserEventsDataRetriever.cs" />
+    <Compile Include="UserFriendsDataRetriever.cs" />
+    <Compile Include="UserGroupsDataRetriever.cs" />
+    <Compile Include="UserPagesDataRetriever.cs" />
+    <Compile Include="UserStatusesDataRetriever.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Facebook">

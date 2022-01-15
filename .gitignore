@@ -18,9 +18,12 @@ x64/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+*.docs
+*.docx
 *_i.c
 *.dll
 *.exe
+FBApi/*
 packages/*
 FacebookAppLogic/bin/*
 FacebookAppLogic/obj/*

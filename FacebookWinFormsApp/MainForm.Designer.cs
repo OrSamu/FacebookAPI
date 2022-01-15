@@ -45,12 +45,14 @@ namespace BasicFacebookFeatures
             this.postButton = new System.Windows.Forms.Button();
             this.listBoxComments = new System.Windows.Forms.ListBox();
             this.listBoxEvents = new System.Windows.Forms.ListBox();
+            this.eventBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.listBoxGroups = new System.Windows.Forms.ListBox();
+            this.groupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.listBoxPages = new System.Windows.Forms.ListBox();
+            this.pageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.eventsLabel = new System.Windows.Forms.Label();
             this.pagesLabel = new System.Windows.Forms.Label();
             this.groupsLabel = new System.Windows.Forms.Label();
-            this.groupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -64,17 +66,15 @@ namespace BasicFacebookFeatures
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.pageBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.eventBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.headlineBluePanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBindingNavigator)).BeginInit();
             this.groupBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // profilePictureBox
@@ -223,6 +223,10 @@ namespace BasicFacebookFeatures
             this.listBoxEvents.TabIndex = 41;
             this.listBoxEvents.ValueMember = "AttendingCount";
             // 
+            // eventBindingSource
+            // 
+            this.eventBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Event);
+            // 
             // listBoxGroups
             // 
             this.listBoxGroups.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -236,6 +240,10 @@ namespace BasicFacebookFeatures
             this.listBoxGroups.Size = new System.Drawing.Size(201, 147);
             this.listBoxGroups.TabIndex = 42;
             // 
+            // groupBindingSource
+            // 
+            this.groupBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Group);
+            // 
             // listBoxPages
             // 
             this.listBoxPages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -248,6 +256,10 @@ namespace BasicFacebookFeatures
             this.listBoxPages.Size = new System.Drawing.Size(201, 147);
             this.listBoxPages.TabIndex = 43;
             this.listBoxPages.ValueMember = "AccessToken";
+            // 
+            // pageBindingSource
+            // 
+            this.pageBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Page);
             // 
             // eventsLabel
             // 
@@ -275,10 +287,6 @@ namespace BasicFacebookFeatures
             this.groupsLabel.Size = new System.Drawing.Size(44, 13);
             this.groupsLabel.TabIndex = 46;
             this.groupsLabel.Text = "Groups:";
-            // 
-            // groupBindingSource
-            // 
-            this.groupBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Group);
             // 
             // groupBindingNavigator
             // 
@@ -362,6 +370,7 @@ namespace BasicFacebookFeatures
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -404,14 +413,6 @@ namespace BasicFacebookFeatures
             this.groupBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
             this.groupBindingNavigatorSaveItem.Text = "Save Data";
             // 
-            // pageBindingSource
-            // 
-            this.pageBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Page);
-            // 
-            // eventBindingSource
-            // 
-            this.eventBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Event);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,12 +443,12 @@ namespace BasicFacebookFeatures
             this.headlineBluePanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupBindingNavigator)).EndInit();
             this.groupBindingNavigator.ResumeLayout(false);
             this.groupBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eventBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
