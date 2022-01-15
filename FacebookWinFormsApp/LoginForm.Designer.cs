@@ -34,6 +34,7 @@
             this.loginLabel = new System.Windows.Forms.Label();
             this.logoBackgroundPanel = new System.Windows.Forms.Panel();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.headlineBluePanel.SuspendLayout();
             this.logoBackgroundPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
@@ -41,10 +42,9 @@
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(70, 157);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonLogin.Location = new System.Drawing.Point(47, 102);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(150, 46);
+            this.buttonLogin.Size = new System.Drawing.Size(100, 30);
             this.buttonLogin.TabIndex = 36;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
@@ -52,10 +52,9 @@
             // 
             // buttonExit
             // 
-            this.buttonExit.Location = new System.Drawing.Point(262, 157);
-            this.buttonExit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonExit.Location = new System.Drawing.Point(175, 102);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(150, 46);
+            this.buttonExit.Size = new System.Drawing.Size(100, 30);
             this.buttonExit.TabIndex = 52;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
@@ -68,9 +67,8 @@
             this.headlineBluePanel.Controls.Add(this.loginLabel);
             this.headlineBluePanel.Controls.Add(this.logoBackgroundPanel);
             this.headlineBluePanel.Location = new System.Drawing.Point(0, 0);
-            this.headlineBluePanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.headlineBluePanel.Name = "headlineBluePanel";
-            this.headlineBluePanel.Size = new System.Drawing.Size(462, 84);
+            this.headlineBluePanel.Size = new System.Drawing.Size(309, 55);
             this.headlineBluePanel.TabIndex = 53;
             // 
             // loginLabel
@@ -78,10 +76,9 @@
             this.loginLabel.AutoSize = true;
             this.loginLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.loginLabel.ForeColor = System.Drawing.Color.White;
-            this.loginLabel.Location = new System.Drawing.Point(189, 31);
-            this.loginLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.loginLabel.Location = new System.Drawing.Point(126, 20);
             this.loginLabel.Name = "loginLabel";
-            this.loginLabel.Size = new System.Drawing.Size(105, 40);
+            this.loginLabel.Size = new System.Drawing.Size(73, 29);
             this.loginLabel.TabIndex = 15;
             this.loginLabel.Text = "Login";
             // 
@@ -90,33 +87,41 @@
             this.logoBackgroundPanel.BackColor = System.Drawing.Color.White;
             this.logoBackgroundPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.logoBackgroundPanel.Controls.Add(this.logoPictureBox);
-            this.logoBackgroundPanel.Location = new System.Drawing.Point(4, 8);
-            this.logoBackgroundPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.logoBackgroundPanel.Location = new System.Drawing.Point(3, 5);
             this.logoBackgroundPanel.Name = "logoBackgroundPanel";
-            this.logoBackgroundPanel.Size = new System.Drawing.Size(66, 68);
+            this.logoBackgroundPanel.Size = new System.Drawing.Size(45, 45);
             this.logoBackgroundPanel.TabIndex = 16;
             // 
             // logoPictureBox
             // 
             this.logoPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.logoPictureBox.Image = global::BasicFacebookFeatures.Properties.Resources.FBSmallLogo;
-            this.logoPictureBox.Location = new System.Drawing.Point(-8, -9);
-            this.logoPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.logoPictureBox.Location = new System.Drawing.Point(-5, -6);
             this.logoPictureBox.Name = "logoPictureBox";
-            this.logoPictureBox.Size = new System.Drawing.Size(75, 77);
+            this.logoPictureBox.Size = new System.Drawing.Size(50, 50);
             this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.logoPictureBox.TabIndex = 14;
             this.logoPictureBox.TabStop = false;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(94, 138);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(117, 17);
+            this.checkBox1.TabIndex = 54;
+            this.checkBox1.Text = "Show detailed data";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 280);
+            this.ClientSize = new System.Drawing.Size(308, 182);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.headlineBluePanel);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonLogin);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
@@ -125,6 +130,7 @@
             this.logoBackgroundPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -136,6 +142,7 @@
         private System.Windows.Forms.Label loginLabel;
         private System.Windows.Forms.Panel logoBackgroundPanel;
         private System.Windows.Forms.PictureBox logoPictureBox;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

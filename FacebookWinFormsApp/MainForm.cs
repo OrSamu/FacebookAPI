@@ -46,6 +46,8 @@ namespace BasicFacebookFeatures
             new Thread(showUserGroups).Start();
             new Thread(showUserEvents).Start();
             new Thread(showUserPages).Start();
+
+            //new Thread(showUserData(listBoxEvents,)).Start();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -150,11 +152,23 @@ namespace BasicFacebookFeatures
             }
         }
 
+        private void showUserData(ListBox io_ListBoxToUpdate)
+        {
+            try
+            {
+                //io_ListBoxToUpdate.Invoke(new Action( () => eventBindingSource.DataSource = ))
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
         private void showUserEvents()
         {
             try
             {
-                listBoxEvents.Invoke(new Action(() => eventBindingSource.DataSource = r_MainPage.RetrievePages()));
+                listBoxEvents.Invoke(new Action(() => eventBindingSource.DataSource = r_MainPage.RetrieveEvents()));
             }
             catch(Exception exception)
             {

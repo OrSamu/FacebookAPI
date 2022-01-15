@@ -158,16 +158,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FacebookAppLogic\FacebookAppLogic.csproj">
-      <Project>{947de5bf-2ee7-47b4-91ad-e27ec3737c90}</Project>
-      <Name>FacebookAppLogic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\FBSmallLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FBSmallLogo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FacebookAppLogic\FacebookAppLogic.csproj">
+      <Project>{947de5bf-2ee7-47b4-91ad-e27ec3737c90}</Project>
+      <Name>FacebookAppLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
