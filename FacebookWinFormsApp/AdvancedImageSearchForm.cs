@@ -74,7 +74,7 @@ namespace BasicFacebookFeatures
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            if(fecthFilters(r_AdvanceImageSearch.GetFilters()))
+            if(fetchFilters(r_AdvanceImageSearch.GetFilters()))
             {
                 buttonSearch.Text = "Loading...";
                 buttonSearch.Enabled = false;
@@ -115,7 +115,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private bool fecthFilters(Filters i_Filters)
+        private bool fetchFilters(Filters i_Filters)
         {
             bool validInput = true;
             i_Filters.MinAmoutOfLikes = checkBoxLikes.Checked ? (int)numericUpDownLikes.Value : 0;
