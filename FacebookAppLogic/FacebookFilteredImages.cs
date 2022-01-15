@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    public class FacebookFilteredImages
+    public class FacebookFilteredImages:IEnumerable<Photo>
     {
         public FacebookFilteredImages()
         {
@@ -19,17 +21,17 @@ namespace FacebookAppLogic
 
         public List<Photo> FilteredPhotos { get; private set; }
 
-        public List<Photo> FetchFilteredPhotos()
+        public void CreateFilteredPhotos()
         {
             FilteredPhotos.Clear();
-            if(Albums == null)
+            if (Albums == null)
             {
                 Albums = UserDataManager.Instance.RetrieveUserAlbums();
             }
 
-            if(Filters.SelectedAlbumIndex == null)
+            if (Filters.SelectedAlbumIndex == null)
             {
-                foreach(Album album in Albums)
+                foreach (Album album in Albums)
                 {
                     searchInAlbum(album);
                 }
@@ -38,10 +40,7 @@ namespace FacebookAppLogic
             {
                 searchInAlbum(Albums[(int)Filters.SelectedAlbumIndex]);
             }
-
-            return FilteredPhotos;
         }
-
         private void searchInAlbum(Album i_Album)
         {
             foreach(Photo photo in i_Album.Photos)
@@ -81,16 +80,77 @@ namespace FacebookAppLogic
             }
         }
 
-        public List<Photo> SortPhotoListByLikes()
+        public void SortPhotoListByLikes()
         {
             FilteredPhotos = FilteredPhotos.OrderByDescending(o => o.LikedBy.Count).ToList();
-            return FilteredPhotos;
         }
 
-        public List<Photo> SortPhotoListByCreatedTime()
+        public void SortPhotoListByCreatedTime()
         {
             FilteredPhotos = FilteredPhotos.OrderByDescending(o => o.CreatedTime).ToList();
-            return FilteredPhotos;
         }
+        
+        public IEnumerator<Photo> GetEnumerator()
+        {
+            return new FilteredPhotosIterator(this);
+        }
+
+        IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        private class FilteredPhotosIterator : IEnumerator<Photo>
+        {
+            private FacebookFilteredImages m_Agregate;
+            private int m_Count;
+            private int m_Index=-1;
+
+            public FilteredPhotosIterator(FacebookFilteredImages i_Collection)
+            {
+                m_Agregate = i_Collection;
+                m_Count = m_Agregate.FilteredPhotos.Count;
+            }
+            public Photo Current
+            {
+                get
+                {
+                    return m_Agregate.FilteredPhotos[m_Index];
+                }
+            }
+
+            object System.Collections.IEnumerator.Current 
+            {
+                get
+                {
+                    return Current;
+                }
+            }
+
+            public void Dispose()
+            {
+                return;
+            }
+
+            public bool MoveNext()
+            {
+                if (m_Count != m_Agregate.FilteredPhotos.Count)
+                {
+                    throw new Exception("Collection can not be changed during iteration!");
+                }
+                if (m_Index >= m_Count)
+                {
+                    throw new Exception("Already reached the end of the collection");
+                }
+
+                return ++m_Index < m_Agregate.FilteredPhotos.Count;
+            }
+
+            public void Reset()
+            {
+                m_Index = -1;
+            }
+        }
+        
     }
 }

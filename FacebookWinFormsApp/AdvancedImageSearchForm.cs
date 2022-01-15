@@ -89,14 +89,14 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                List<Photo> gridPhotos = r_AdvanceImageSearch.GetFilteredImages();
-                if(gridPhotos.Count == 0)
+                r_AdvanceImageSearch.CreateFilteredImages();
+                if(r_AdvanceImageSearch.FacebookFilteredImagesCount() == 0)
                 {
                     MessageBox.Show(k_NoPhotosFoundError);
                 }
                 else
                 {
-                    addPhotoToListBoxImagePanel(gridPhotos);
+                    addPhotoToListBoxImagePanel();
                     comboBoxSortBy.Invoke(new Action(() => comboBoxSortBy.Enabled = true));
                 }
 
@@ -148,24 +148,36 @@ namespace BasicFacebookFeatures
             return validInput;
         }
 
-        private void addPhotoToListBoxImagePanel(List<Photo> i_GridPhotos)
+        private void addPhotoToListBoxImagePanel()
         {
             if(flowLayoutPanelImages.Controls.Count != 0)
             {
                 flowLayoutPanelImages.Invoke(new Action(() => flowLayoutPanelImages.Controls.Clear()));
             }
+            IEnumerator<Photo> iterator = r_AdvanceImageSearch.GetEnumerator();
 
-            foreach(Photo photo in i_GridPhotos)
+            while(iterator.MoveNext())
             {
                 flowLayoutPanelImages.Invoke(
                     new Action(
                         () =>
-                            {
-                                GridPhoto picture = new GridPhoto(photo);
-                                picture.Click += picture_Click;
-                                flowLayoutPanelImages.Controls.Add(picture);
-                            }));
+                        {
+                            GridPhoto picture = new GridPhoto(iterator.Current);
+                            picture.Click += picture_Click;
+                            flowLayoutPanelImages.Controls.Add(picture);
+                        }));
             }
+            //foreach(Photo photo in i_GridPhotos)
+            //{
+            //    flowLayoutPanelImages.Invoke(
+            //        new Action(
+            //            () =>
+            //                {
+            //                    GridPhoto picture = new GridPhoto(photo);
+            //                    picture.Click += picture_Click;
+            //                    flowLayoutPanelImages.Controls.Add(picture);
+            //                }));
+            //}
         }
 
         private void picture_Click(object sender, EventArgs e)
@@ -190,18 +202,17 @@ namespace BasicFacebookFeatures
 
         private void comboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Photo> gridPhotos = null;
             if(comboBoxSortBy.Text == k_SortByCreationDate)
             {
-                gridPhotos = r_AdvanceImageSearch.GetFilteredImagesSortedCreationDate();
+                 r_AdvanceImageSearch.SortByCreatedTime();
             }
 
             if(comboBoxSortBy.Text == k_SortByLikes)
             {
-                gridPhotos = r_AdvanceImageSearch.GetFilteredImagesSortedByLikes();
+               r_AdvanceImageSearch.SortByLikes();
             }
 
-            addPhotoToListBoxImagePanel(gridPhotos);
+            addPhotoToListBoxImagePanel();
         }
 
         private void updateListBoxData()
