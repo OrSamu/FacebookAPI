@@ -34,7 +34,7 @@
             this.loginLabel = new System.Windows.Forms.Label();
             this.logoBackgroundPanel = new System.Windows.Forms.Panel();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.formatedStatusesCheckBox = new System.Windows.Forms.CheckBox();
             this.headlineBluePanel.SuspendLayout();
             this.logoBackgroundPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
@@ -103,22 +103,24 @@
             this.logoPictureBox.TabIndex = 14;
             this.logoPictureBox.TabStop = false;
             // 
-            // checkBox1
+            // formatedStatusesCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(94, 138);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(117, 17);
-            this.checkBox1.TabIndex = 54;
-            this.checkBox1.Text = "Show detailed data";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.formatedStatusesCheckBox.AllowDrop = true;
+            this.formatedStatusesCheckBox.AutoSize = true;
+            this.formatedStatusesCheckBox.Location = new System.Drawing.Point(47, 149);
+            this.formatedStatusesCheckBox.Name = "formatedStatusesCheckBox";
+            this.formatedStatusesCheckBox.Size = new System.Drawing.Size(135, 17);
+            this.formatedStatusesCheckBox.TabIndex = 54;
+            this.formatedStatusesCheckBox.Text = "Show detailed statuses";
+            this.formatedStatusesCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.formatedStatusesCheckBox.UseVisualStyleBackColor = true;
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(308, 182);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.formatedStatusesCheckBox);
             this.Controls.Add(this.headlineBluePanel);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonLogin);
@@ -142,7 +144,7 @@
         private System.Windows.Forms.Label loginLabel;
         private System.Windows.Forms.Panel logoBackgroundPanel;
         private System.Windows.Forms.PictureBox logoPictureBox;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox formatedStatusesCheckBox;
     }
 }
 

@@ -17,10 +17,9 @@ namespace BasicFacebookFeatures
         private readonly LoginForm r_LoginForm;
         private readonly MainPage r_MainPage;
 
-        public MainForm(LoginForm i_LoginForm)
+        public MainForm(LoginForm i_LoginForm,bool i_ShowDetailedStatuses)
         {
-            r_MainPage = new MainPage();
-
+            r_MainPage = new MainPage(i_ShowDetailedStatuses);
             InitializeComponent();
             this.FormClosing += MainForm_FormClosing;
             r_LoginForm = i_LoginForm;
@@ -46,8 +45,6 @@ namespace BasicFacebookFeatures
             new Thread(showUserGroups).Start();
             new Thread(showUserEvents).Start();
             new Thread(showUserPages).Start();
-
-            //new Thread(showUserData(listBoxEvents,)).Start();
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -147,18 +144,6 @@ namespace BasicFacebookFeatures
                 }
             }
             catch(Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-        }
-
-        private void showUserData(ListBox io_ListBoxToUpdate)
-        {
-            try
-            {
-                //io_ListBoxToUpdate.Invoke(new Action( () => eventBindingSource.DataSource = ))
-            }
-            catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
