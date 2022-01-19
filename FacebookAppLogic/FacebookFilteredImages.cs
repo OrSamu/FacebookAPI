@@ -13,13 +13,15 @@ namespace FacebookAppLogic
             Filters = new Filters();
             Albums = null;
             FilteredPhotos = new List<Photo>();
+            Count = 0;
         }
 
         public Filters Filters { get; set; }
 
-        public FacebookObjectCollection<Album> Albums { get; private set; }
+        private FacebookObjectCollection<Album> Albums {  get;  set; }
 
-        public List<Photo> FilteredPhotos { get; private set; }
+        private List<Photo> FilteredPhotos { get;  set; }
+        public int Count { get;private set; } 
 
         public void CreateFilteredPhotos()
         {
@@ -40,6 +42,7 @@ namespace FacebookAppLogic
             {
                 searchInAlbum(Albums[(int)Filters.SelectedAlbumIndex]);
             }
+            Count = FilteredPhotos.Count;
         }
         private void searchInAlbum(Album i_Album)
         {
@@ -102,20 +105,20 @@ namespace FacebookAppLogic
 
         private class FilteredPhotosIterator : IEnumerator<Photo>
         {
-            private FacebookFilteredImages m_Agregate;
+            private FacebookFilteredImages m_Collection;
             private int m_Count;
             private int m_Index=-1;
 
             public FilteredPhotosIterator(FacebookFilteredImages i_Collection)
             {
-                m_Agregate = i_Collection;
-                m_Count = m_Agregate.FilteredPhotos.Count;
+                m_Collection = i_Collection;
+                m_Count = m_Collection.Count;
             }
             public Photo Current
             {
                 get
                 {
-                    return m_Agregate.FilteredPhotos[m_Index];
+                    return m_Collection.FilteredPhotos[m_Index];
                 }
             }
 
@@ -134,7 +137,7 @@ namespace FacebookAppLogic
 
             public bool MoveNext()
             {
-                if (m_Count != m_Agregate.FilteredPhotos.Count)
+                if (m_Count != m_Collection.Count)
                 {
                     throw new Exception("Collection can not be changed during iteration!");
                 }
@@ -143,7 +146,7 @@ namespace FacebookAppLogic
                     throw new Exception("Already reached the end of the collection");
                 }
 
-                return ++m_Index < m_Agregate.FilteredPhotos.Count;
+                return ++m_Index < m_Collection.Count;
             }
 
             public void Reset()

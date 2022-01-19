@@ -167,17 +167,6 @@ namespace BasicFacebookFeatures
                             flowLayoutPanelImages.Controls.Add(picture);
                         }));
             }
-            //foreach(Photo photo in i_GridPhotos)
-            //{
-            //    flowLayoutPanelImages.Invoke(
-            //        new Action(
-            //            () =>
-            //                {
-            //                    GridPhoto picture = new GridPhoto(photo);
-            //                    picture.Click += picture_Click;
-            //                    flowLayoutPanelImages.Controls.Add(picture);
-            //                }));
-            //}
         }
 
         private void picture_Click(object sender, EventArgs e)

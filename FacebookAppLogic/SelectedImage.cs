@@ -29,7 +29,7 @@ namespace FacebookAppLogic
 
         public List<string> FetchSelectedData(IPhotoData i_PhotoData)
         {
-            return i_PhotoData.GetData(Photo);
+           return i_PhotoData.GetData(Photo);
         }
     }
 }

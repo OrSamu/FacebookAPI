@@ -20,9 +20,10 @@ namespace FacebookAppLogic
         {
             return r_FacebookFilteredImages.GetEnumerator();
         }
+ 
         public int FacebookFilteredImagesCount()
         {
-            return r_FacebookFilteredImages.FilteredPhotos.Count;
+            return r_FacebookFilteredImages.Count;
         }
         public PhotoTags GetTagsDataType()
         {
