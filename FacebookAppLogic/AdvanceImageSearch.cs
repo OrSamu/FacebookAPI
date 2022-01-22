@@ -16,6 +16,15 @@ namespace FacebookAppLogic
             r_UserDataManager = UserDataManager.Instance;
         }
 
+        public IEnumerator<Photo> GetEnumerator()
+        {
+            return r_FacebookFilteredImages.GetEnumerator();
+        }
+ 
+        public int FacebookFilteredImagesCount()
+        {
+            return r_FacebookFilteredImages.Count;
+        }
         public PhotoTags GetTagsDataType()
         {
             return new PhotoTags();
@@ -55,25 +64,23 @@ namespace FacebookAppLogic
         {
             return m_SelectedImage.FetchSelectedData(i_DataType);
         }
-
-        public List<Photo> GetFilteredImages()
+        public void CreateFilteredImages()
         {
-            return r_FacebookFilteredImages.FetchFilteredPhotos();
+             r_FacebookFilteredImages.CreateFilteredPhotos();
         }
-
         public Filters GetFilters()
         {
             return r_FacebookFilteredImages.Filters;
         }
 
-        public List<Photo> GetFilteredImagesSortedByLikes()
+        public void SortByLikes()
         {
-            return r_FacebookFilteredImages.SortPhotoListByLikes();
+             r_FacebookFilteredImages.SortPhotoListByLikes();
         }
 
-        public List<Photo> GetFilteredImagesSortedCreationDate()
+        public void SortByCreatedTime()
         {
-            return r_FacebookFilteredImages.SortPhotoListByCreatedTime();
+             r_FacebookFilteredImages.SortPhotoListByCreatedTime();
         }
 
         public FacebookObjectCollection<Album> RetrieveUserAlbums()
