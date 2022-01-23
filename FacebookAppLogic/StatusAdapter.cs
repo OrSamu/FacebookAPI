@@ -13,27 +13,11 @@ namespace FacebookAppLogic
             r_OldFormatPost = i_PostToFormat;
         }
 
-        public string GenerateStatusFormat()
+        public string GenerateStatusFormat(IStatusFormatterStrategy i_StatusFormatterStrategy)
         {
             try
             {
-                StringBuilder newPost = new StringBuilder();
-
-                newPost.Append(string.Format("({0}): ", r_OldFormatPost.CreatedTime.ToString()));
-                if(r_OldFormatPost.Message != null)
-                {
-                    newPost.Append(r_OldFormatPost.Message);
-                }
-                else if(r_OldFormatPost.Caption != null)
-                {
-                    newPost.Append(r_OldFormatPost.Caption);
-                }
-                else
-                {
-                    newPost.Append(string.Format("[{0}]", r_OldFormatPost.Type));
-                }
-
-                return newPost.ToString();
+                return i_StatusFormatterStrategy.GenerateStatusFormat(r_OldFormatPost);
             }
             catch(Exception exception)
             {

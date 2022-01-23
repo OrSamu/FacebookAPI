@@ -4,7 +4,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    public class DetailedStatusFormat
+    public class DetailedStatusFormat : IStatusFormatterStrategy
     {
         public string GenerateStatusFormat(Post i_PostToFormat)
         {
