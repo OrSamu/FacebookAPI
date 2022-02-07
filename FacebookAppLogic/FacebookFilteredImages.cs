@@ -95,65 +95,16 @@ namespace FacebookAppLogic
         
         public IEnumerator<Photo> GetEnumerator()
         {
-            return new FilteredPhotosIterator(this);
+            foreach (Photo photo in FilteredPhotos)
+            {
+                yield return photo;
+                                
+            }
         }
 
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
-        }
-
-        private class FilteredPhotosIterator : IEnumerator<Photo>
-        {
-            private FacebookFilteredImages m_Collection;
-            private int m_Count;
-            private int m_Index=-1;
-
-            public FilteredPhotosIterator(FacebookFilteredImages i_Collection)
-            {
-                m_Collection = i_Collection;
-                m_Count = m_Collection.Count;
-            }
-            public Photo Current
-            {
-                get
-                {
-                    return m_Collection.FilteredPhotos[m_Index];
-                }
-            }
-
-            object System.Collections.IEnumerator.Current 
-            {
-                get
-                {
-                    return Current;
-                }
-            }
-
-            public void Dispose()
-            {
-                return;
-            }
-
-            public bool MoveNext()
-            {
-                if (m_Count != m_Collection.Count)
-                {
-                    throw new Exception("Collection can not be changed during iteration!");
-                }
-                if (m_Index >= m_Count)
-                {
-                    throw new Exception("Already reached the end of the collection");
-                }
-
-                return ++m_Index < m_Collection.Count;
-            }
-
-            public void Reset()
-            {
-                m_Index = -1;
-            }
-        }
-        
+        }        
     }
 }

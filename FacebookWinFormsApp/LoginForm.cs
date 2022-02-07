@@ -20,8 +20,8 @@ namespace BasicFacebookFeatures
             r_LoginPage.Login();
             if(r_LoginPage.IsAuthenticated())
             {
-                Form mainForm;
-                mainForm = new MainForm(this);
+                Form mainForm = new MainForm(this,formatedStatusesCheckBox.Checked);
+
                 mainForm.ShowDialog();
             }
             else

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
@@ -6,10 +7,15 @@ namespace FacebookAppLogic
     public class MainPage
     {
         private readonly UserDataManager r_UserDataManager;
+        private readonly bool r_ShowDetailedStatuses;
+        private IStatusFormatterStrategy statusFormatterStrategy;
 
-        public MainPage()
+
+
+        public MainPage(bool i_ShowDetailedStatuses)
         {
             r_UserDataManager = UserDataManager.Instance;
+            r_ShowDetailedStatuses = i_ShowDetailedStatuses;
         }
 
         public void Logout()
@@ -31,9 +37,19 @@ namespace FacebookAppLogic
         {
             List<string> postedStatuses = new List<string>();
 
-            foreach(Post status in r_UserDataManager.RetrievePostedStatuses())
+            switch (r_ShowDetailedStatuses)
             {
-                postedStatuses.Add(new StatusAdapter(status).GenerateStatusFormat());
+                case true:
+                    statusFormatterStrategy = new DetailedStatusFormat();
+                    break;
+                case false:
+                    statusFormatterStrategy = new BasicStatusFormat();
+                    break;
+            }
+
+            foreach (Post status in r_UserDataManager.RetrievePostedStatuses())
+            {
+                postedStatuses.Add(new StatusAdapter(status).GenerateStatusFormat(statusFormatterStrategy));
             }
 
             return postedStatuses;

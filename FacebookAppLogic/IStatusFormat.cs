@@ -2,6 +2,6 @@
 {
     public interface IStatusFormat
     {
-        string GenerateStatusFormat();
+        string GenerateStatusFormat(IStatusFormatterStrategy i_Formatter);
     }
 }

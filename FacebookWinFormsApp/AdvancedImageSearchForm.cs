@@ -212,7 +212,6 @@ namespace BasicFacebookFeatures
                 {
                     IPhotoData photoData = (comboBoxShowData.SelectedItem as IPhotoData);
                     listBoxPictureData.Items.Clear();
-
                     List<string> imageData = r_AdvanceImageSearch.GetDataOfSelectedImage(photoData);
 
                     if(imageData.Count != 0)
